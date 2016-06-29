@@ -75,9 +75,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="StringExtensions.cs" />
-    <Compile Include="TodoApp.cs" />
-    <Compile Include="TodoList.cs" />
+    <Compile Include="src\components\TodoItem.cs" />
+    <Compile Include="src\Extensions.cs" />
+    <Compile Include="src\components\TodoApp.cs" />
+    <Compile Include="src\components\TodoList.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -99,7 +100,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Tests\" />
+    <Folder Include="tests\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

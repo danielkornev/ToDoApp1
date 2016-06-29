@@ -25,8 +25,8 @@ namespace ToDoApp1
 		public override NElement Render()
 		{
 			return new NXaml<StackPanel>().
-						  Children(Items.Select((i, idx) => new NXaml<TextBlock>(idx).Text("*" + i)));
-		}
+						  Children(Items.Map((i, idx) => new TodoItem(i)));
+		} 
 
 		#endregion
 
