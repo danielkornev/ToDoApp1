@@ -65,7 +65,8 @@ namespace ToDoApp1
 
 		protected override void InitState()
 		{
-			Items = new string[0];
+			Items = new string[3] {"React", "Redux", "Immutable"};
+
 			Text = "";
 		}
 
