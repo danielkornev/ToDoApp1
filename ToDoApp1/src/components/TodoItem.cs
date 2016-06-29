@@ -1,20 +1,21 @@
-﻿using NReact;
+﻿using System.Collections.Generic;
+using NReact;
 using System.Windows.Controls;
 
 namespace ToDoApp1
 {
 	class TodoItem : NClass
 	{
-		private string i;
+		private Dictionary<string, string> props;
 
-		public TodoItem(string i)
+		public TodoItem(Dictionary<string,string> props)
 		{
-			this.i = i;
+			this.props = props;
 		}
 
 		public override NElement Render()
 		{
-			return new NXaml<TextBlock>(i).Text("*" + i);
+			return new NXaml<TextBlock>(props).Text("* " + props["text"]);
 		}
 	}
 }

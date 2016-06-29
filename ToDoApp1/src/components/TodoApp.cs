@@ -1,13 +1,13 @@
 ﻿using NReact;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-
+using System.Windows.Input;
 
 namespace ToDoApp1
 {
-	using System.Windows.Input;
 	using static NFactory;
 
 	class TodoApp : NClass
@@ -24,11 +24,11 @@ namespace ToDoApp1
 			}
 		}
 		
-		protected string[] Items
+		protected List<Dictionary<string, string>> Items
 		{
 			get
 			{
-				return GetState(NFactory.Properties.Items, default(string[]));
+				return GetState(NFactory.Properties.Items, new List<Dictionary<string, string>>());
 			}
 			set
 			{
@@ -55,7 +55,7 @@ namespace ToDoApp1
 													Width(200),
 
 											 new NXaml<Button>().
-													Content("Add #" + (Items.Length + 1)).
+													Content("Add #" + (Items.Count + 1)).
 													Click(OnAdd)),
 
 							 new TodoList { Items = this.Items }
@@ -65,7 +65,27 @@ namespace ToDoApp1
 
 		protected override void InitState()
 		{
-			Items = new string[3] {"React", "Redux", "Immutable"};
+			Items = new List<Dictionary<string, string>>
+				{
+					new Dictionary<string, string>
+						{
+							["id"] = "1",
+							["text"] = "React",
+							["status"] = "active"
+						},
+					new Dictionary<string, string>
+					{
+						["id"] = "2",
+						["text"] = "Redux",
+						["status"] = "active"
+					},
+					new Dictionary<string, string>
+					{
+						["id"] = "3",
+						["text"] = "Immutable",
+						["status"] = "complete"
+					}
+				};
 
 			Text = "";
 		}
@@ -77,7 +97,20 @@ namespace ToDoApp1
 
 		void OnAdd(object sender, EventArgs args)
 		{
-			Items = Items.Concat(Text);
+			AddItem();
+		}
+
+		void AddItem()
+		{
+			// so we need to find the max index
+			var idx = Items.Count - 1;
+			Items.Add(new Dictionary<string, string>
+				{
+					["id"] = idx.ToString(),
+					["text"] = Text,
+					["status"] = "active"
+				}
+			);
 			Text = "";
 		}
 
@@ -85,13 +118,9 @@ namespace ToDoApp1
 		{
 			var args = e as KeyEventArgs;
 
-			if (args != null)
+			if (args?.Key == System.Windows.Input.Key.Enter)
 			{
-				if (args.Key == System.Windows.Input.Key.Enter)
-				{
-					Items = Items.Concat(Text);
-					Text = "";
-				}
+				AddItem();
 			}
 		}
 	}
