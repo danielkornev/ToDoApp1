@@ -14,5 +14,13 @@ namespace ToDoApp1
 		}
 
 		public static IEnumerable<TResult> Map<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, int, TResult> selector) => source.Select(selector);
-	}
-}
+
+		#region Static Extensions
+
+		public static NList<TSource> ToNList<TSource>(this IEnumerable<TSource> source)
+		{
+			return new NList<TSource>(source);
+		}
+		#endregion
+	} // class
+} // namespace
