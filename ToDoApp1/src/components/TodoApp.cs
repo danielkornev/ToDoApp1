@@ -1,6 +1,7 @@
 ﻿using NReact;
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -24,11 +25,11 @@ namespace ToDoApp1
 			}
 		}
 
-		public List<TodoListItem> Items
+		public ImmutableList<TodoListItem> Items
 		{
 			get
 			{
-				return GetState(NFactory.Properties.Items, new List<TodoListItem>());
+				return GetState(NFactory.Properties.Items, new List<TodoListItem>().ToImmutableList());
 			}
 			set
 			{
@@ -72,7 +73,7 @@ namespace ToDoApp1
 				new TodoListItem(1, "React", TodoListItem.Statuses.Active),
 				new TodoListItem(2, "Redux", TodoListItem.Statuses.Active),
 				new TodoListItem(3, "Immutable", TodoListItem.Statuses.Completed)
-			};
+			}.ToImmutableList();
 
 			Text = "";
 		}
@@ -91,14 +92,7 @@ namespace ToDoApp1
 		{
 			// so we need to find the max index
 			int idx = Items.Count;
-
-			// cloning original list
-			var items = Items.ToList();
-			// adding new item
-			items.Add(new TodoListItem(idx, Text, TodoListItem.Statuses.Active));
-			// assigning it to the Items property
-			this.Items = items;
-
+			Items = Items.Add(new TodoListItem(idx, Text, TodoListItem.Statuses.Active));
 			Text = "";
 		}
 

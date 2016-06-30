@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using NReact;
 using System.Windows.Controls;
@@ -30,11 +29,11 @@ namespace ToDoApp1
 	public class TodoList : NClass
 	{
 
-		public List<TodoListItem> Items
+		public IList<TodoListItem> Items
 		{
 			get
 			{
-				return Get(NFactory.Properties.Items, new List<TodoListItem>());
+				return Get<IList<TodoListItem>>(NFactory.Properties.Items, new List<TodoListItem>());
 			}
 			set
 			{
@@ -45,7 +44,7 @@ namespace ToDoApp1
 		/// <summary>
 		/// Filters the items according to their status
 		/// </summary>
-		public List<TodoListItem> GetItems()
+		public IList<TodoListItem> GetItems()
 		{
 			if (this.Filter == null) return this.Items;
 			else return this.Items.Where(i => i.Status == this.Filter).ToList();
@@ -59,7 +58,7 @@ namespace ToDoApp1
 						  Children(GetItems().Select((item, idx) => new TodoItem(item)));
 		} 
 
-		public TodoList(TodoListItem.Statuses? filter, List<TodoListItem> items)
+		public TodoList(TodoListItem.Statuses? filter, IList<TodoListItem> items)
 		{
 			Items = items;
 			Filter = filter;
