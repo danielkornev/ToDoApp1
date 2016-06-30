@@ -74,6 +74,10 @@
       <Project>{88b8f1d2-ba04-4188-839e-77d0758a8c4d}</Project>
       <Name>TodoApp1</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WPFExtensions\WPFExtensions.csproj">
+      <Project>{f34be240-15f5-44f5-b885-2c997781b8f2}</Project>
+      <Name>WPFExtensions</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

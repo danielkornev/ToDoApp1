@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NReactUnitTesting", "Avalon
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoApp1Tests", "TodoApp1Tests\TodoApp1Tests.csproj", "{C09B0D7A-B68D-4EC9-8607-E2EE3CDBD38C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFExtensions", "WPFExtensions\WPFExtensions.csproj", "{F34BE240-15F5-44F5-B885-2C997781B8F2}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		..\..\nreact\NReact\NReact.projitems*{0119133b-d40a-49b5-b185-68e883a23779}*SharedItemsImports = 4
@@ -45,6 +47,10 @@ Global
 		{C09B0D7A-B68D-4EC9-8607-E2EE3CDBD38C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C09B0D7A-B68D-4EC9-8607-E2EE3CDBD38C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C09B0D7A-B68D-4EC9-8607-E2EE3CDBD38C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F34BE240-15F5-44F5-B885-2C997781B8F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F34BE240-15F5-44F5-B885-2C997781B8F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F34BE240-15F5-44F5-B885-2C997781B8F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F34BE240-15F5-44F5-B885-2C997781B8F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

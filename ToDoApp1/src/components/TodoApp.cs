@@ -24,7 +24,7 @@ namespace ToDoApp1
 			}
 		}
 
-		protected List<TodoListItem> Items
+		public List<TodoListItem> Items
 		{
 			get
 			{
@@ -49,12 +49,14 @@ namespace ToDoApp1
 							new NXaml<StackPanel>().
 									Orientation(Orientation.Horizontal).
 									Children(new NXaml<TextBox>().
+													Key("addItemTextBox").
 													Text(Text).
 													TextChanged(OnChange).
 													KeyDown(OnKeyDown).
 													Width(200),
 
 											 new NXaml<Button>().
+													Key("addItemButton").
 													Content("Add #" + (Items.Count + 1)).
 													Click(OnAdd)),
 
@@ -88,8 +90,12 @@ namespace ToDoApp1
 		void AddItem()
 		{
 			// so we need to find the max index
-			var idx = Items.Count - 1;
-			Items.Add(new TodoListItem(idx, Text, TodoListItem.Statuses.Active));
+			int idx = Items.Count;
+
+			var items = Items;
+			items.Add(new TodoListItem(idx, Text, TodoListItem.Statuses.Active));
+			Items = items;
+			
 			Text = "";
 		}
 

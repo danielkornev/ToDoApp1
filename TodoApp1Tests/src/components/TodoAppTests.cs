@@ -1,20 +1,29 @@
-﻿using NUnit.Framework;
-using ToDoApp1;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using NReact;
+using NUnit.Framework;
 
 namespace ToDoApp1.Tests
 {
-	[TestFixture()]
+	[TestFixture]
+	[Apartment(ApartmentState.STA)]
 	public class TodoAppTests
 	{
-		[Test()]
-		public void RenderTest()
+		[Test(Description = "It should allow adding an additional Todo item")]
+		public void AllowAddingTodoItems()
 		{
-			Assert.Fail();
+			var app = new TodoApp();
+			var rendered = app.Render().RenderAsFrameworkElement() as StackPanel;
+
+			rendered.FindChild<TextBox>((elem) => true).Text = "Item007";
+			rendered.FindChild<Button>((elem) => elem.Content.ToString().StartsWith("Add")).RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+
+			Assert.AreEqual(1, app.Items.Count);
+			Assert.AreEqual("Item007", app.Items.First().Title);
 		}
 	}
 }
