@@ -13,7 +13,7 @@ namespace ToDoApp1.Tests
 	[Apartment(ApartmentState.STA)]
 	public class TodoAppTests
 	{
-		[Test(Description = "It should allow adding an additional Todo item")]
+		[Test, Description("It should allow adding an additional Todo item")]
 		public void AllowAddingTodoItems()
 		{
 			var app = new TodoApp();
