@@ -48,7 +48,7 @@ namespace ToDoApp1
 		public List<TodoListItem> GetItems()
 		{
 			if (this.Filter == null) return this.Items;
-			return this.Items.Where(i => i.Status == this.Filter).ToList();
+			else return this.Items.Where(i => i.Status == this.Filter).ToList();
 		}
 
 		public TodoListItem.Statuses? Filter { get; private set; }
