@@ -65,7 +65,7 @@
       <Name>NReactUnitTesting</Name>
     </ProjectReference>
     <ProjectReference Include="..\ToDoApp1\TodoApp1.csproj">
-      <Project>{88b8f1d2-ba04-4188-839e-77d0758a8c4d}</Project>
+      <Project>{88B8F1D2-BA04-4188-839E-77D0758A8C4D}</Project>
       <Name>TodoApp1</Name>
     </ProjectReference>
   </ItemGroup>

@@ -26,6 +26,10 @@ namespace ToDoApp1
 		/// </summary>
 		public List<Dictionary<string, string>> GetItems()
 		{
+			if (this.Filter == "all")
+			{
+				return this.Items;
+			}
 			return this.Items.Where(i => i["status"] == this.Filter).ToList(); 
 		}
 
