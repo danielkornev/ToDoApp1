@@ -30,7 +30,7 @@ namespace ToDoApp1.Tests
 
 		}
 
-		[Test(Description = "renders a list with only the active items if the filter is active")]
+		[Test, Description("renders a list with only the active items if the filter is active")]
 		public void RendersAlistWithOnlyTheActiveItemsIfTheFilterIsActive()
 		{
 
@@ -48,7 +48,7 @@ namespace ToDoApp1.Tests
 			Assert.AreEqual("Redux", (sp.Children[1] as TextBlock)?.Text);
 		}
 
-		[Test(Description = "supports 'all' filter")]
+		[Test, Description("supports 'all' filter")]
 		public void RendersAllWhenAllFilterIsPassed()
 		{
 			var todolist = new TodoList(null, _todos);
@@ -57,7 +57,7 @@ namespace ToDoApp1.Tests
 			Assert.AreEqual(new[] { "React", "Redux", "Immutable" }, panel?.Children?.OfType<TextBlock>().Select((elem, i) => elem.Text));
 		}
 
-		[Test(Description = "supports 'completed' filter")]
+		[Test, Description("supports 'completed' filter")]
 		public void RendersOnlyOneWhenCompletedFilterIsPassed()
 		{
 			const TodoListItem.Statuses filter = TodoListItem.Statuses.Completed;
