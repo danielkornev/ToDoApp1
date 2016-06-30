@@ -28,11 +28,11 @@ namespace ToDoApp1
 		{
 			get
 			{
-				return GetState(NFactory.Properties.Items, new List<TodoListItem>());
+				return Get(NFactory.Properties.Items, new List<TodoListItem>());
 			}
 			set
 			{
-				SetState(NFactory.Properties.Items, value);
+				Set(NFactory.Properties.Items, value);
 			}
 		}
 
