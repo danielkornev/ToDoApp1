@@ -24,15 +24,15 @@ namespace ToDoApp1
 			}
 		}
 
-		public List<TodoListItem> Items
+		public NList<TodoListItem> Items
 		{
 			get
 			{
-				return Get(NFactory.Properties.Items, new List<TodoListItem>());
+				return GetState(NFactory.Properties.Items, new NList<TodoListItem>());
 			}
 			set
 			{
-				Set(NFactory.Properties.Items, value);
+				SetState(NFactory.Properties.Items, value);
 			}
 		}
 
@@ -67,7 +67,7 @@ namespace ToDoApp1
 
 		protected override void InitState()
 		{
-			Items = new List<TodoListItem>
+			Items = new NList<TodoListItem>
 			{
 				new TodoListItem(1, "React", TodoListItem.Statuses.Active),
 				new TodoListItem(2, "Redux", TodoListItem.Statuses.Active),
@@ -92,9 +92,7 @@ namespace ToDoApp1
 			// so we need to find the max index
 			int idx = Items.Count;
 
-			var items = Items;
-			items.Add(new TodoListItem(idx, Text, TodoListItem.Statuses.Active));
-			Items = items;
+			Items = Items.AddItem(new TodoListItem(idx, Text, TodoListItem.Statuses.Active));
 			
 			Text = "";
 		}

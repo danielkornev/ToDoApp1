@@ -30,11 +30,11 @@ namespace ToDoApp1
 	public class TodoList : NClass
 	{
 
-		public List<TodoListItem> Items
+		public NList<TodoListItem> Items
 		{
 			get
 			{
-				return Get(NFactory.Properties.Items, new List<TodoListItem>());
+				return Get(NFactory.Properties.Items, new NList<TodoListItem>());
 			}
 			set
 			{
@@ -45,10 +45,10 @@ namespace ToDoApp1
 		/// <summary>
 		/// Filters the items according to their status
 		/// </summary>
-		public List<TodoListItem> GetItems()
+		public NList<TodoListItem> GetItems()
 		{
 			if (this.Filter == null) return this.Items;
-			else return this.Items.Where(i => i.Status == this.Filter).ToList();
+			else return this.Items.Where(i => i.Status == this.Filter).ToNList();
 		}
 
 		public TodoListItem.Statuses? Filter { get; private set; }
@@ -59,7 +59,7 @@ namespace ToDoApp1
 						  Children(GetItems().Map((item, idx) => new TodoItem(item)));
 		} 
 
-		public TodoList(TodoListItem.Statuses? filter, List<TodoListItem> items)
+		public TodoList(TodoListItem.Statuses? filter, NList<TodoListItem> items)
 		{
 			Items = items;
 			Filter = filter;

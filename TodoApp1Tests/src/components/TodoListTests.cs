@@ -11,12 +11,12 @@ namespace ToDoApp1.Tests
 	[Apartment(System.Threading.ApartmentState.STA)]
 	public class TodoListTests
 	{
-		List<TodoListItem> _todos;
+		NList<TodoListItem> _todos;
 
 		[SetUp]
 		public void Init()
 		{
-			_todos = new List<TodoListItem>
+			_todos = new NList<TodoListItem>
 			{
 				new TodoListItem(1, "React", TodoListItem.Statuses.Active),
 				new TodoListItem(1, "Redux", TodoListItem.Statuses.Active),
