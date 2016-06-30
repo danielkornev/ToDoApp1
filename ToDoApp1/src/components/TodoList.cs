@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using NReact;
 using System.Windows.Controls;
@@ -7,13 +8,33 @@ namespace ToDoApp1
 {
 	using static NFactory;
 
+	public class TodoListItem
+	{
+		public enum Statuses
+		{
+			Active, Completed
+		}
+
+		public int Id { get; }
+		public string Title { get; }
+		public Statuses Status { get; }
+
+		public TodoListItem(int id, string title, Statuses status)
+		{
+			Id = id;
+			Title = title;
+			Status = status;
+		}
+	}
+
 	internal class TodoList : NClass
 	{
-		public List<Dictionary<string,string>> Items
+
+		public List<TodoListItem> Items
 		{
 			get
 			{
-				return Get(NFactory.Properties.Items, new List<Dictionary<string, string>>());
+				return Get(NFactory.Properties.Items, new List<TodoListItem>());
 			}
 			set
 			{
@@ -24,24 +45,21 @@ namespace ToDoApp1
 		/// <summary>
 		/// Filters the items according to their status
 		/// </summary>
-		public List<Dictionary<string, string>> GetItems()
+		public List<TodoListItem> GetItems()
 		{
-			if (this.Filter == "all")
-			{
-				return this.Items;
-			}
-			return this.Items.Where(i => i["status"] == this.Filter).ToList(); 
+			if (this.Filter == null) return this.Items;
+			return this.Items.Where(i => i.Status == this.Filter).ToList();
 		}
 
-		public string Filter { get; private set; }
+		public TodoListItem.Statuses? Filter { get; private set; }
 
 		public override NElement Render()
 		{
 			return new NXaml<StackPanel>().
-						  Children(GetItems().Map((i, idx) => new TodoItem(i)));
+						  Children(GetItems().Map((item, idx) => new TodoItem(item)));
 		} 
 
-		public TodoList(string filter, List<Dictionary<string,string>> items)
+		public TodoList(TodoListItem.Statuses? filter, List<TodoListItem> items)
 		{
 			Items = items;
 			Filter = filter;

@@ -23,19 +23,19 @@ namespace ToDoApp1
 				SetState(NFactory.Properties.Text, value);
 			}
 		}
-		
-		protected List<Dictionary<string, string>> Items
+
+		protected List<TodoListItem> Items
 		{
 			get
 			{
-				return GetState(NFactory.Properties.Items, new List<Dictionary<string, string>>());
+				return GetState(NFactory.Properties.Items, new List<TodoListItem>());
 			}
 			set
 			{
 				SetState(NFactory.Properties.Items, value);
 			}
 		}
-		
+
 		public override NElement Render()
 		{
 			return
@@ -58,34 +58,19 @@ namespace ToDoApp1
 													Content("Add #" + (Items.Count + 1)).
 													Click(OnAdd)),
 
-							 new TodoList("active", Items)
+							 new TodoList(TodoListItem.Statuses.Active, Items)
 
 							 );
 		}
 
 		protected override void InitState()
 		{
-			Items = new List<Dictionary<string, string>>
-				{
-					new Dictionary<string, string>
-						{
-							["id"] = "1",
-							["text"] = "React",
-							["status"] = "active"
-						},
-					new Dictionary<string, string>
-					{
-						["id"] = "2",
-						["text"] = "Redux",
-						["status"] = "active"
-					},
-					new Dictionary<string, string>
-					{
-						["id"] = "3",
-						["text"] = "Immutable",
-						["status"] = "completed"
-					}
-				};
+			Items = new List<TodoListItem>
+			{
+				new TodoListItem(1, "React", TodoListItem.Statuses.Active),
+				new TodoListItem(2, "Redux", TodoListItem.Statuses.Active),
+				new TodoListItem(3, "Immutable", TodoListItem.Statuses.Completed)
+			};
 
 			Text = "";
 		}
@@ -104,13 +89,7 @@ namespace ToDoApp1
 		{
 			// so we need to find the max index
 			var idx = Items.Count - 1;
-			Items.Add(new Dictionary<string, string>
-				{
-					["id"] = idx.ToString(),
-					["text"] = Text,
-					["status"] = "active"
-				}
-			);
+			Items.Add(new TodoListItem(idx, Text, TodoListItem.Statuses.Active));
 			Text = "";
 		}
 

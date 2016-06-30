@@ -6,16 +6,16 @@ namespace ToDoApp1
 {
 	internal class TodoItem : NClass
 	{
-		private Dictionary<string, string> props;
+		private TodoListItem todoListItem;
 
-		public TodoItem(Dictionary<string,string> props)
+		public TodoItem(TodoListItem todoListItem)
 		{
-			this.props = props;
+			this.todoListItem = todoListItem;
 		}
 
 		public override NElement Render()
 		{
-			return new NXaml<TextBlock>(props).Text(props["text"]);
+			return new NXaml<TextBlock>(todoListItem).Text(todoListItem.Title);
 		}
 	}
 }

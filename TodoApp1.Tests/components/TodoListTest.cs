@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mime;
 using System.Windows.Controls;
 using NReact;
 using NUnit.Framework;
@@ -11,35 +12,17 @@ namespace TodoApp1Tests
 	[Apartment(System.Threading.ApartmentState.STA)]
 	public class TodoListTest
 	{
-		List<Dictionary<string, string>> _todos;
+		List<TodoListItem> _todos;
 
 		[SetUp]
 		public void Init()
 		{
-			#region Todos
-			_todos = new List<Dictionary<string, string>>
+			_todos = new List<TodoListItem>
 			{
-				new Dictionary<string, string>
-				{
-					["id"] = "1",
-					["text"] = "React",
-					["status"] = "active"
-				},
-				new Dictionary<string, string>
-				{
-					["id"] = "2",
-					["text"] = "Redux",
-					["status"] = "active"
-				},
-				new Dictionary<string, string>
-				{
-					["id"] = "3",
-					["text"] = "Immutable",
-					["status"] = "completed"
-				}
+				new TodoListItem(1, "React", TodoListItem.Statuses.Active),
+				new TodoListItem(1, "Redux", TodoListItem.Statuses.Active),
+				new TodoListItem(1, "Immutable", TodoListItem.Statuses.Completed)
 			};
-
-			#endregion
 		}
 
 		[TearDown]
@@ -53,7 +36,7 @@ namespace TodoApp1Tests
 		{
 
 			// filter to use
-			const string filter = "active";
+			TodoListItem.Statuses filter = TodoListItem.Statuses.Active;
 
 			var todolist = new TodoList(filter, _todos);
 
@@ -69,11 +52,20 @@ namespace TodoApp1Tests
 		[Test(Description = "supports 'all' filter")]
 		public void RendersAllWhenAllFilterIsPassed()
 		{
-			const string filter = "all";
-			var todolist = new TodoList(filter, _todos);
+			var todolist = new TodoList(null, _todos);
 			var panel = todolist.Render().RenderAsFrameworkElement() as StackPanel;
 			Assert.AreEqual(3, panel?.Children?.Count);
-			Assert.AreEqual(new [] { "React", "Redux", "Immutable" }, panel.Children.OfType<TextBlock>().Map((elem, i) => elem.Text));
+			Assert.AreEqual(new [] { "React", "Redux", "Immutable" }, panel?.Children?.OfType<TextBlock>().Map((elem, i) => elem.Text));
+		}
+
+		[Test(Description = "supports 'completed' filter")]
+		public void RendersOnlyOneWhenCompletedFilterIsPassed()
+		{
+			const TodoListItem.Statuses filter = TodoListItem.Statuses.Completed;
+			var todolist = new TodoList(filter, _todos);
+			var panel = todolist.Render().RenderAsFrameworkElement() as StackPanel;
+			Assert.AreEqual(1, panel?.Children?.Count);
+			Assert.AreEqual(new[] { "Immutable" }, panel?.Children?.OfType<TextBlock>().Map((elem, i) => elem.Text));
 		}
 
 	} // class
