@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using NReact;
 using System.Windows.Controls;
 
@@ -6,7 +7,7 @@ namespace ToDoApp1
 {
 	using static NFactory;
 
-	class TodoList : NClass
+	internal class TodoList : NClass
 	{
 		public List<Dictionary<string,string>> Items
 		{
@@ -20,15 +21,26 @@ namespace ToDoApp1
 			}
 		}
 
+		/// <summary>
+		/// Filters the items according to their status
+		/// </summary>
+		public List<Dictionary<string, string>> GetItems()
+		{
+			return this.Items.Where(i => i["status"] == this.Filter).ToList(); 
+		}
+
+		public string Filter { get; private set; }
+
 		public override NElement Render()
 		{
 			return new NXaml<StackPanel>().
-						  Children(Items.Map((i, idx) => new TodoItem(i)));
+						  Children(GetItems().Map((i, idx) => new TodoItem(i)));
 		} 
 
-		public TodoList()
+		public TodoList(string filter, List<Dictionary<string,string>> items)
 		{
-			Items = new List<Dictionary<string, string>>();
+			Items = items;
+			Filter = filter;
 		}
 	}
 }

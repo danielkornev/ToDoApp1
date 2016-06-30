@@ -4,7 +4,7 @@ using System.Windows.Controls;
 
 namespace ToDoApp1
 {
-	class TodoItem : NClass
+	internal class TodoItem : NClass
 	{
 		private Dictionary<string, string> props;
 
@@ -15,7 +15,7 @@ namespace ToDoApp1
 
 		public override NElement Render()
 		{
-			return new NXaml<TextBlock>(props).Text("* " + props["text"]);
+			return new NXaml<TextBlock>(props).Text(props["text"]);
 		}
 	}
 }

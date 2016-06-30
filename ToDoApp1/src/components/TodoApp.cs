@@ -10,7 +10,7 @@ namespace ToDoApp1
 {
 	using static NFactory;
 
-	class TodoApp : NClass
+	internal class TodoApp : NClass
 	{
 		protected string Text
 		{
@@ -58,7 +58,7 @@ namespace ToDoApp1
 													Content("Add #" + (Items.Count + 1)).
 													Click(OnAdd)),
 
-							 new TodoList { Items = this.Items }
+							 new TodoList("active", Items)
 
 							 );
 		}
@@ -83,7 +83,7 @@ namespace ToDoApp1
 					{
 						["id"] = "3",
 						["text"] = "Immutable",
-						["status"] = "complete"
+						["status"] = "completed"
 					}
 				};
 
