@@ -27,7 +27,7 @@ namespace ToDoApp1
 		}
 	}
 
-	internal class TodoList : NClass
+	public class TodoList : NClass
 	{
 
 		public List<TodoListItem> Items

@@ -10,7 +10,7 @@ namespace ToDoApp1
 {
 	using static NFactory;
 
-	internal class TodoApp : NClass
+	public class TodoApp : NClass
 	{
 		protected string Text
 		{

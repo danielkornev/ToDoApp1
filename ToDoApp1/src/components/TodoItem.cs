@@ -4,7 +4,7 @@ using System.Windows.Controls;
 
 namespace ToDoApp1
 {
-	internal class TodoItem : NClass
+	public class TodoItem : NClass
 	{
 		private TodoListItem todoListItem;
 
