@@ -71,7 +71,7 @@ namespace ToDoApp1
 			Items = new List<TodoListItem>
 			{
 				new TodoListItem(1, "React", TodoListItem.Statuses.Active),
-				new TodoListItem(2, "Redux", TodoListItem.Statuses.Active),
+				new TodoListItem(2, "Redux", TodoListItem.Statuses.Active, true),
 				new TodoListItem(3, "Immutable", TodoListItem.Statuses.Completed)
 			}.ToImmutableList();
 

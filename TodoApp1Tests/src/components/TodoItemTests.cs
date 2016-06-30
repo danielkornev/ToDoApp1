@@ -1,15 +1,9 @@
 ﻿using NReact;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Controls;
-using ToDoApp1;
 
-namespace TodoApp1Tests
+namespace ToDoApp1.Tests
 {
 	[TestFixture, Apartment(ApartmentState.STA)]
 	public class TodoItemTests
@@ -19,11 +13,17 @@ namespace TodoApp1Tests
 		{
 			var todoitem = new TodoItem(new TodoListItem(0, "React", TodoListItem.Statuses.Active));
 
-			var component = todoitem.Render();
-
-			var tb = component.RenderAsFrameworkElement() as TextBlock;
+			var tb = todoitem.Render().RenderAsFrameworkElement() as TextBlock;
 
 			Assert.AreEqual("React", tb?.Text);
+		}
+
+		[Test, Description("renders a text field for item being edited")]
+		public void RendersItemBeingEdited()
+		{
+			var todoitem = new TodoItem(new TodoListItem(117, "Quandry", TodoListItem.Statuses.Active, true));
+			var textBox = todoitem.Render().RenderAsFrameworkElement() as TextBox;
+			Assert.AreEqual("Quandry", textBox?.Text);
 		}
 	} // class
 } // namespace

@@ -15,6 +15,10 @@ namespace ToDoApp1
 
 		public override NElement Render()
 		{
+			if (todoListItem.Editing)
+			{
+				return new NXaml<TextBox>(todoListItem).Text(todoListItem.Title);
+			}
 			return new NXaml<TextBlock>(todoListItem).Text(todoListItem.Title);
 		}
 	}

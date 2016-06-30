@@ -17,12 +17,14 @@ namespace ToDoApp1
 		public int Id { get; }
 		public string Title { get; }
 		public Statuses Status { get; }
+		public bool Editing { get; }
 
-		public TodoListItem(int id, string title, Statuses status)
+		public TodoListItem(int id, string title, Statuses status, bool editing = false)
 		{
 			Id = id;
 			Title = title;
 			Status = status;
+			Editing = editing;
 		}
 	}
 
