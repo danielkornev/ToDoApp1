@@ -73,10 +73,8 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="src\components\TodoItem.cs" />
-    <Compile Include="src\Extensions.cs" />
     <Compile Include="src\components\TodoApp.cs" />
     <Compile Include="src\components\TodoList.cs" />
-    <Compile Include="src\NList.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
