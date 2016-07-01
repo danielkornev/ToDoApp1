@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Windows;
 using NReact;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace ToDoApp1
 {
@@ -17,9 +20,22 @@ namespace ToDoApp1
 		{
 			if (todoListItem.Editing)
 			{
-				return new NXaml<TextBox>(todoListItem).Text(todoListItem.Title);
+				return new NXaml<TextBox>(todoListItem).Text(todoListItem.Title).KeyDown(OnKeyDown);
 			}
 			return new NXaml<TextBlock>(todoListItem).Text(todoListItem.Title);
+		}
+
+		private void OnKeyDown(object sender, EventArgs e)
+		{
+			var args = e as KeyEventArgs;
+
+			var tb = sender as TextBox;
+
+			if (args?.Key == System.Windows.Input.Key.Enter)
+			{
+				App.ItemsStore.Dispatch(new TodoItemUpdateAction(todoListItem.Id, tb?.Text));
+			}
+
 		}
 	}
 }
