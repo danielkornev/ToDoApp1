@@ -22,6 +22,11 @@ namespace ToDoApp1
 			{
 				return new NXaml<TextBox>(todoListItem).Text(todoListItem.Title).KeyDown(OnKeyDown);
 			}
+
+		    if (todoListItem.Status == TodoListItem.Statuses.Completed)
+		    {
+		        return new NXaml<TextBlock>(todoListItem).Text(todoListItem.Title).TextDecorations(TextDecorations.Strikethrough);
+		    }
 			return new NXaml<TextBlock>(todoListItem).Text(todoListItem.Title);
 		}
 

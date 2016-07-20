@@ -5,11 +5,11 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoApp1", "ToDoApp1\TodoApp1.csproj", "{88B8F1D2-BA04-4188-839E-77D0758A8C4D}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "NReact.Shared", "..\..\nreact\NReact\NReact.Shared.shproj", "{15FB086D-8A41-4931-8D1F-DA0D673E2C23}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "NReact.Shared", "..\nreact\NReact\NReact.Shared.shproj", "{15FB086D-8A41-4931-8D1F-DA0D673E2C23}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NReact.WPF", "..\..\nreact\NReact.WPF\NReact.WPF.csproj", "{0119133B-D40A-49B5-B185-68E883A23779}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NReact.WPF", "..\nreact\NReact.WPF\NReact.WPF.csproj", "{0119133B-D40A-49B5-B185-68E883A23779}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NReact.Generator.WPF", "..\..\nreact\generators\NReact.Generator.WPF\NReact.Generator.WPF.csproj", "{9064CC14-B0A0-43E2-89D0-4E2995B6339C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NReact.Generator.WPF", "..\nreact\generators\NReact.Generator.WPF\NReact.Generator.WPF.csproj", "{9064CC14-B0A0-43E2-89D0-4E2995B6339C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NReactUnitTesting", "AvalonUnitTesting\NReactUnitTesting.csproj", "{90ECF6BD-8E58-4D76-929F-CF55D2D80DB7}"
 EndProject
@@ -19,8 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFExtensions", "WPFExtensi
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		..\..\nreact\NReact\NReact.projitems*{0119133b-d40a-49b5-b185-68e883a23779}*SharedItemsImports = 4
-		..\..\nreact\NReact\NReact.projitems*{15fb086d-8a41-4931-8d1f-da0d673e2c23}*SharedItemsImports = 13
+		..\nreact\NReact\NReact.projitems*{0119133b-d40a-49b5-b185-68e883a23779}*SharedItemsImports = 4
+		..\nreact\NReact\NReact.projitems*{15fb086d-8a41-4931-8d1f-da0d673e2c23}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

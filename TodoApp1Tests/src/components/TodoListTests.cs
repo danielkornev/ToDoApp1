@@ -48,7 +48,17 @@ namespace ToDoApp1.Tests
 			Assert.AreEqual("Redux", (sp.Children[1] as TextBlock)?.Text);
 		}
 
-		[Test, Description("supports 'all' filter")]
+        [Test, Description("supports 'completed' filter")]
+        public void RendersOnlyOneWhenCompletedFilterIsPassed()
+        {
+            const TodoListItem.Statuses filter = TodoListItem.Statuses.Completed;
+            var todolist = new TodoList(filter, _todos);
+            var panel = todolist.Render().RenderAsFrameworkElement() as StackPanel;
+            Assert.AreEqual(1, panel?.Children?.Count);
+            Assert.AreEqual(new[] { "Immutable" }, panel?.Children?.OfType<TextBlock>().Select((elem, i) => elem.Text));
+        }
+
+        [Test, Description("supports 'all' filter")]
 		public void RendersAllWhenAllFilterIsPassed()
 		{
 			var todolist = new TodoList(null, _todos);
@@ -57,15 +67,7 @@ namespace ToDoApp1.Tests
 			Assert.AreEqual(new[] { "React", "Redux", "Immutable" }, panel?.Children?.OfType<TextBlock>().Select((elem, i) => elem.Text));
 		}
 
-		[Test, Description("supports 'completed' filter")]
-		public void RendersOnlyOneWhenCompletedFilterIsPassed()
-		{
-			const TodoListItem.Statuses filter = TodoListItem.Statuses.Completed;
-			var todolist = new TodoList(filter, _todos);
-			var panel = todolist.Render().RenderAsFrameworkElement() as StackPanel;
-			Assert.AreEqual(1, panel?.Children?.Count);
-			Assert.AreEqual(new[] { "Immutable" }, panel?.Children?.OfType<TextBlock>().Select((elem, i) => elem.Text));
-		}
+		
 
 	} // class
 } // namespace

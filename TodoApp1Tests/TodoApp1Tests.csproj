@@ -76,7 +76,7 @@
     <Compile Include="src\components\TodoListTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\nreact\NReact.WPF\NReact.WPF.csproj">
+    <ProjectReference Include="..\..\nreact\NReact.WPF\NReact.WPF.csproj">
       <Project>{0119133B-D40A-49B5-B185-68E883A23779}</Project>
       <Name>NReact.WPF</Name>
     </ProjectReference>

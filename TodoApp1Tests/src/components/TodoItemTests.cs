@@ -1,10 +1,12 @@
 ﻿using System.Collections.Immutable;
+using System.Linq;
 using NReact;
 using NUnit.Framework;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Castle.Components.DictionaryAdapter.Xml;
 using Moq;
 using Redux;
 
@@ -31,7 +33,15 @@ namespace ToDoApp1.Tests
 			Assert.AreEqual("Quandry", textBox?.Text);
 		}
 
-		[Test]
+        [Test, Description("strikes out the item if it is completed")]
+        public void StrikesOutTheItemIfItIsCompleted()
+        {
+            var todoitem = new TodoItem(new TodoListItem(117, "Quandry", TodoListItem.Statuses.Completed, false));
+            var textBlock = todoitem.Render().RenderAsFrameworkElement() as TextBlock;
+            Assert.AreEqual(true, textBlock.TextDecorations.Any(t => t.Location == TextDecorationLocation.Strikethrough));
+        }
+
+        [Test]
 		public void EmitsEventWhenChangeSubmitted()
 		{
 			var itemsStoreMock = new Mock<IStore<ImmutableList<TodoListItem>>>();
@@ -46,5 +56,7 @@ namespace ToDoApp1.Tests
 
 			itemsStoreMock.Verify(store => store.Dispatch(It.IsAny<IAction>()));
 		}
+
+	  
 	} // class
 } // namespace
