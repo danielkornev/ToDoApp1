@@ -42,13 +42,13 @@ namespace ToDoApp1
                             new NXaml<CheckBox>(todoListItem).
                                     IsChecked(this.IsCompleted(todoListItem)).
                                     HorizontalAlignment(HorizontalAlignment.Left).
-                                    Margin(0, 0, 10, 0),
+                                    Margin(0, 0, 10, 0).
+                                    Click(todoListItem.ToggleCompleteAction),
 
                             new NXaml<TextBlock>(todoListItem).
                                     Text(todoListItem.Title).
                                     TextDecorations(TextDecorations.Strikethrough).
                                     HorizontalAlignment(HorizontalAlignment.Left).
-                                    KeyDown(OnKeyDown).
                                     Margin(0,0,10,0),
 
                             new NXaml<Button>(todoListItem).
@@ -65,12 +65,12 @@ namespace ToDoApp1
                    Children(
                            new NXaml<CheckBox>(todoListItem).
                                    HorizontalAlignment(HorizontalAlignment.Left).
-                                   Margin(0, 0, 10, 0),
+                                   Margin(0, 0, 10, 0).
+                                   Click(todoListItem.ToggleCompleteAction),
 
                            new NXaml<TextBlock>(todoListItem).
                                    Text(todoListItem.Title).
                                    HorizontalAlignment(HorizontalAlignment.Left).
-                                   KeyDown(OnKeyDown).
                                    Margin(0,0,10,0),
 
                            new NXaml<Button>(todoListItem).

@@ -78,6 +78,28 @@ namespace ToDoApp1.Tests
             Assert.AreEqual(true, deleted);
 	    }
 
+	    [Test, Description("invokes callback when checkbox is clicked")]
+	    public void InvokesCallbackWhenCheckboxIsClicked()
+	    {
+            var text = "React";
+            var isChecked = false;
+            // we define a mock deleteItem function
+            Action toggleComplete = () =>
+            {
+                isChecked = true;
+            };
+
+
+            var todoitem = new TodoItem(new TodoListItem(0, text, TodoListItem.Statuses.Active, false, null, toggleComplete));
+
+            var stackPanel = todoitem.Render().RenderAsFrameworkElement() as StackPanel;
+
+            // raising our event handler
+            stackPanel.Children.OfType<CheckBox>().First().RaiseEvent(new RoutedEventArgs(CheckBox.ClickEvent));
+
+            Assert.AreEqual(true, isChecked);
+        }
+
         [Test, Description("")]
 		public void EmitsEventWhenChangeSubmitted()
 		{

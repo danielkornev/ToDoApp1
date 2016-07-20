@@ -20,16 +20,21 @@ namespace ToDoApp1
 		public Statuses Status { get; }
 		public bool Editing { get; }
 
-	    public TodoListItem(int id, string title, Statuses status, bool editing = false, Action deleteAction = null)
+        public Action ToggleCompleteAction { get; }
+
+        public Action DeleteAction { get; }
+
+        public TodoListItem(int id, string title, Statuses status, bool editing = false, Action deleteAction = null, Action toggleCompleteAction = null)
 		{
 			Id = id;
 			Title = title;
 			Status = status;
 			Editing = editing;
 		    DeleteAction = deleteAction;
+		    ToggleCompleteAction = toggleCompleteAction;
 		}
 
-	    public Action DeleteAction { get;  }
+	    
 	}
 
 	public class TodoList : NClass
