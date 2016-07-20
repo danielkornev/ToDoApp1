@@ -3,6 +3,7 @@ using System.Linq;
 using NReact;
 using System;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace ToDoApp1
 {
@@ -23,8 +24,9 @@ namespace ToDoApp1
         public Action ToggleCompleteAction { get; }
 
         public Action DeleteAction { get; }
+        public EventHandler EditAction { get; }
 
-        public TodoListItem(int id, string title, Statuses status, bool editing = false, Action deleteAction = null, Action toggleCompleteAction = null)
+        public TodoListItem(int id, string title, Statuses status, bool editing = false, Action deleteAction = null, Action toggleCompleteAction = null, EventHandler editAction = null)
 		{
 			Id = id;
 			Title = title;
@@ -32,9 +34,10 @@ namespace ToDoApp1
 			Editing = editing;
 		    DeleteAction = deleteAction;
 		    ToggleCompleteAction = toggleCompleteAction;
+		    EditAction = editAction;
 		}
 
-	    
+
 	}
 
 	public class TodoList : NClass

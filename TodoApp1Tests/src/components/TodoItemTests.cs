@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using Moq;
 using Redux;
+using static System.Windows.Forms.SystemInformation;
 
 namespace ToDoApp1.Tests
 {
@@ -22,7 +23,7 @@ namespace ToDoApp1.Tests
 
             var stackPanel = todoitem.Render().RenderAsFrameworkElement() as StackPanel;
 
-            var tb = stackPanel.Children.OfType<TextBlock>().FirstOrDefault();
+		    var tb = stackPanel.Children.OfType<ContentControl>().First(c=>c.GetType()!=typeof(CheckBox)).Content as TextBlock;
 
 			Assert.AreEqual("React", tb?.Text);
 		}
@@ -42,7 +43,7 @@ namespace ToDoApp1.Tests
             var todoitem = new TodoItem(new TodoListItem(117, "Quandry", TodoListItem.Statuses.Completed, false));
 
             var stackPanel = todoitem.Render().RenderAsFrameworkElement() as StackPanel;
-            var textBlock = stackPanel.Children.OfType<TextBlock>().FirstOrDefault();
+            var textBlock = stackPanel.Children.OfType<ContentControl>().First(c=>c.GetType()!=typeof(CheckBox)).Content as TextBlock;
             Assert.AreEqual(true, textBlock.TextDecorations.Any(t => t.Location == TextDecorationLocation.Strikethrough));
         }
 
@@ -83,7 +84,7 @@ namespace ToDoApp1.Tests
 	    {
             var text = "React";
             var isChecked = false;
-            // we define a mock deleteItem function
+            // we define a mock toggleComplete function
             Action toggleComplete = () =>
             {
                 isChecked = true;
@@ -98,6 +99,33 @@ namespace ToDoApp1.Tests
             stackPanel.Children.OfType<CheckBox>().First().RaiseEvent(new RoutedEventArgs(CheckBox.ClickEvent));
 
             Assert.AreEqual(true, isChecked);
+        }
+
+	    [Test, Description("calls a callback when text is double clicked")]
+	    public void CallsCallbackWhenTextIsDoubleClicked()
+	    {
+            var text = "React";
+            // we define a mock editItem function
+
+	        EventHandler editItem;
+
+            editItem = delegate(object sender, EventArgs e)
+            {
+                text = "Redux";
+            };
+
+            var todoitem = new TodoItem(new TodoListItem(0, text, TodoListItem.Statuses.Active, false, null, null, editItem));
+
+            var stackPanel = todoitem.Render().RenderAsFrameworkElement() as StackPanel;
+
+	        var contentControl = stackPanel?.Children.OfType<ContentControl>().First(c=>c.GetType()!=typeof(CheckBox));
+	        var textBlock = contentControl.Content as TextBlock;
+            
+            var e1 = new MouseButtonEventArgs(Mouse.PrimaryDevice, 0, MouseButton.Left) { RoutedEvent = ContentControl.MouseDoubleClickEvent };
+
+            contentControl.RaiseEvent(e1);
+            
+            Assert.AreEqual("Redux", text);
         }
 
         [Test, Description("")]

@@ -45,11 +45,15 @@ namespace ToDoApp1
                                     Margin(0, 0, 10, 0).
                                     Click(todoListItem.ToggleCompleteAction),
 
-                            new NXaml<TextBlock>(todoListItem).
-                                    Text(todoListItem.Title).
-                                    TextDecorations(TextDecorations.Strikethrough).
-                                    HorizontalAlignment(HorizontalAlignment.Left).
-                                    Margin(0,0,10,0),
+                            new NXaml<ContentControl>().Content(
+
+                                    new NXaml<TextBlock>(todoListItem).
+                                            Text(todoListItem.Title).
+                                            TextDecorations(TextDecorations.Strikethrough).
+                                            HorizontalAlignment(HorizontalAlignment.Left).
+                                            Margin(0,0,10,0)
+                                            
+                                            ).MouseDoubleClick(todoListItem.EditAction),
 
                             new NXaml<Button>(todoListItem).
                                     Key("deleteTodoListItem").
@@ -68,10 +72,15 @@ namespace ToDoApp1
                                    Margin(0, 0, 10, 0).
                                    Click(todoListItem.ToggleCompleteAction),
 
-                           new NXaml<TextBlock>(todoListItem).
-                                   Text(todoListItem.Title).
-                                   HorizontalAlignment(HorizontalAlignment.Left).
-                                   Margin(0,0,10,0),
+                           new NXaml<ContentControl>().Content(
+
+                                    new NXaml<TextBlock>(todoListItem).
+                                            Text(todoListItem.Title).
+                                            TextDecorations(TextDecorations.Strikethrough).
+                                            HorizontalAlignment(HorizontalAlignment.Left).
+                                            Margin(0, 0, 10, 0)
+
+                                            ).MouseDoubleClick(todoListItem.EditAction),
 
                            new NXaml<Button>(todoListItem).
                                     Key("deleteTodoListItem").

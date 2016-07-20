@@ -45,8 +45,8 @@ namespace ToDoApp1.Tests
 			var sp = component.RenderAsFrameworkElement() as StackPanel;
 
 			Assert.AreEqual(2, sp.Children.Count);
-			Assert.AreEqual("React", ((sp.Children[0] as StackPanel).Children[1] as TextBlock)?.Text);
-			Assert.AreEqual("Redux", ((sp.Children[1] as StackPanel).Children[1] as TextBlock)?.Text);
+			Assert.AreEqual("React", (((sp.Children[0] as StackPanel).Children[1] as ContentControl).Content as TextBlock)?.Text);
+			Assert.AreEqual("Redux", (((sp.Children[1] as StackPanel).Children[1] as ContentControl).Content as TextBlock)?.Text);
 		}
 
         [Test, Description("supports 'completed' filter")]
@@ -57,8 +57,13 @@ namespace ToDoApp1.Tests
             var panel = todolist.Render().RenderAsFrameworkElement() as StackPanel;
             Assert.AreEqual(1, panel?.Children?.Count);
 
+            var txt =
+            ((panel.Children.OfType<StackPanel>()
+                .First()
+                .Children.OfType<ContentControl>()
+                .First(c => c.GetType() != typeof(CheckBox))).Content as TextBlock).Text;
 
-            Assert.AreEqual(new[] { "Immutable" }, (panel?.Children?.OfType<StackPanel>().First()).Children.OfType<TextBlock>().Select((elem, i) => elem.Text));
+            Assert.AreEqual("Immutable", txt);
         }
 
         [Test, Description("supports 'all' filter")]
@@ -77,7 +82,7 @@ namespace ToDoApp1.Tests
                      panel?.
                 Children?.
                 OfType<StackPanel>().
-                Select((elem, i) => elem.Children.OfType<TextBlock>().First().Text)
+                Select((elem, i) => (elem.Children.OfType<ContentControl>().First(c=>c.GetType()!=typeof(CheckBox)).Content as TextBlock).Text)
                      );
         }
 
