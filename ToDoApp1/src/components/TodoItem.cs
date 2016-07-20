@@ -48,7 +48,13 @@ namespace ToDoApp1
                                     Text(todoListItem.Title).
                                     TextDecorations(TextDecorations.Strikethrough).
                                     HorizontalAlignment(HorizontalAlignment.Left).
-                                    KeyDown(OnKeyDown)
+                                    KeyDown(OnKeyDown).
+                                    Margin(0,0,10,0),
+
+                            new NXaml<Button>(todoListItem).
+                                    Key("deleteTodoListItem").
+                                    Content("X").
+                                    Click(todoListItem.DeleteAction)
                              );
             }
 
@@ -64,7 +70,13 @@ namespace ToDoApp1
                            new NXaml<TextBlock>(todoListItem).
                                    Text(todoListItem.Title).
                                    HorizontalAlignment(HorizontalAlignment.Left).
-                                   KeyDown(OnKeyDown)
+                                   KeyDown(OnKeyDown).
+                                   Margin(0,0,10,0),
+
+                           new NXaml<Button>(todoListItem).
+                                    Key("deleteTodoListItem").
+                                    Content("X").
+                                    Click(todoListItem.DeleteAction)
                             );
         }
 

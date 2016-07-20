@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using NReact;
+using System;
 using System.Windows.Controls;
 
 namespace ToDoApp1
@@ -19,13 +20,16 @@ namespace ToDoApp1
 		public Statuses Status { get; }
 		public bool Editing { get; }
 
-	    public TodoListItem(int id, string title, Statuses status, bool editing = false)
+	    public TodoListItem(int id, string title, Statuses status, bool editing = false, Action deleteAction = null)
 		{
 			Id = id;
 			Title = title;
 			Status = status;
 			Editing = editing;
+		    DeleteAction = deleteAction;
 		}
+
+	    public Action DeleteAction { get;  }
 	}
 
 	public class TodoList : NClass

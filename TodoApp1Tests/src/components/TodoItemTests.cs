@@ -1,12 +1,12 @@
 ﻿using System.Collections.Immutable;
 using System.Linq;
+using System;
 using NReact;
 using NUnit.Framework;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using Castle.Components.DictionaryAdapter.Xml;
 using Moq;
 using Redux;
 
@@ -56,7 +56,29 @@ namespace ToDoApp1.Tests
             Assert.AreEqual(true, checkBox.IsChecked.GetValueOrDefault());
         }
 
-        [Test]
+	    [Test, Description("invokes callback when the delete button is clicked")]
+        public void InvokesCallbackWhenTheDeleteButtonIsClicked()
+	    {
+	        var text = "React";
+	        var deleted = false;
+            // we define a mock deleteItem function
+	        Action deleteItem = () =>
+	        {
+	            deleted = true;
+	        };
+
+
+            var todoitem = new TodoItem(new TodoListItem(0, text, TodoListItem.Statuses.Active, false, deleteItem));
+
+            var stackPanel = todoitem.Render().RenderAsFrameworkElement() as StackPanel;
+
+            // raising our event handler
+	        stackPanel.Children.OfType<Button>().First().RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+
+            Assert.AreEqual(true, deleted);
+	    }
+
+        [Test, Description("")]
 		public void EmitsEventWhenChangeSubmitted()
 		{
 			var itemsStoreMock = new Mock<IStore<ImmutableList<TodoListItem>>>();
