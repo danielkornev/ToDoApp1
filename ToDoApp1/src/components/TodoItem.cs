@@ -20,15 +20,59 @@ namespace ToDoApp1
 		{
 			if (todoListItem.Editing)
 			{
-				return new NXaml<TextBox>(todoListItem).Text(todoListItem.Title).KeyDown(OnKeyDown);
+                return
+              new NXaml<StackPanel>().
+                    HorizontalAlignment(HorizontalAlignment.Left).
+                    Orientation(Orientation.Horizontal).
+                    Children(
+                            new NXaml<CheckBox>(todoListItem).
+                                    IsChecked(todoListItem.IsCompleted).
+                                    HorizontalAlignment(HorizontalAlignment.Left).
+                                    Margin(0,0,10,0),
+                  
+                            new NXaml<TextBox>(todoListItem).
+                                    Text(todoListItem.Title).
+                                    HorizontalAlignment(HorizontalAlignment.Left).
+                                    KeyDown(OnKeyDown)
+                             );
 			}
 
 		    if (todoListItem.Status == TodoListItem.Statuses.Completed)
 		    {
-		        return new NXaml<TextBlock>(todoListItem).Text(todoListItem.Title).TextDecorations(TextDecorations.Strikethrough);
-		    }
-			return new NXaml<TextBlock>(todoListItem).Text(todoListItem.Title);
-		}
+                return
+              new NXaml<StackPanel>().
+                    HorizontalAlignment(HorizontalAlignment.Left).
+                    Orientation(Orientation.Horizontal).
+                    Children(
+                            new NXaml<CheckBox>(todoListItem).
+                                    IsChecked(todoListItem.IsCompleted).
+                                    HorizontalAlignment(HorizontalAlignment.Left).
+                                    Margin(0, 0, 10, 0),
+
+                            new NXaml<TextBlock>(todoListItem).
+                                    Text(todoListItem.Title).
+                                    TextDecorations(TextDecorations.Strikethrough).
+                                    HorizontalAlignment(HorizontalAlignment.Left).
+                                    KeyDown(OnKeyDown)
+                             );
+            }
+
+            return
+             new NXaml<StackPanel>().
+                   HorizontalAlignment(HorizontalAlignment.Left).
+                   Orientation(Orientation.Horizontal).
+                   Children(
+                           new NXaml<CheckBox>(todoListItem).
+                                   IsChecked(todoListItem.IsCompleted).
+                                   HorizontalAlignment(HorizontalAlignment.Left).
+                                   Margin(0, 0, 10, 0),
+
+                           new NXaml<TextBlock>(todoListItem).
+                                   Text(todoListItem.Title).
+                                   HorizontalAlignment(HorizontalAlignment.Left).
+                                   KeyDown(OnKeyDown)
+                            );
+        }
 
 		private void OnKeyDown(object sender, EventArgs e)
 		{

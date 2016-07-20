@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Controls;
+using Castle.Core.Internal;
 using NReact;
 using NUnit.Framework;
 using ToDoApp1;
@@ -44,8 +45,8 @@ namespace ToDoApp1.Tests
 			var sp = component.RenderAsFrameworkElement() as StackPanel;
 
 			Assert.AreEqual(2, sp.Children.Count);
-			Assert.AreEqual("React", (sp.Children[0] as TextBlock)?.Text);
-			Assert.AreEqual("Redux", (sp.Children[1] as TextBlock)?.Text);
+			Assert.AreEqual("React", ((sp.Children[0] as StackPanel).Children[1] as TextBlock)?.Text);
+			Assert.AreEqual("Redux", ((sp.Children[1] as StackPanel).Children[1] as TextBlock)?.Text);
 		}
 
         [Test, Description("supports 'completed' filter")]
@@ -55,7 +56,9 @@ namespace ToDoApp1.Tests
             var todolist = new TodoList(filter, _todos);
             var panel = todolist.Render().RenderAsFrameworkElement() as StackPanel;
             Assert.AreEqual(1, panel?.Children?.Count);
-            Assert.AreEqual(new[] { "Immutable" }, panel?.Children?.OfType<TextBlock>().Select((elem, i) => elem.Text));
+
+
+            Assert.AreEqual(new[] { "Immutable" }, (panel?.Children?.OfType<StackPanel>().First()).Children.OfType<TextBlock>().Select((elem, i) => elem.Text));
         }
 
         [Test, Description("supports 'all' filter")]
@@ -64,8 +67,19 @@ namespace ToDoApp1.Tests
 			var todolist = new TodoList(null, _todos);
 			var panel = todolist.Render().RenderAsFrameworkElement() as StackPanel;
 			Assert.AreEqual(3, panel?.Children?.Count);
-			Assert.AreEqual(new[] { "React", "Redux", "Immutable" }, panel?.Children?.OfType<TextBlock>().Select((elem, i) => elem.Text));
-		}
+
+		    Assert.AreEqual(new[]
+                     {
+                         "React",
+                         "Redux",
+                         "Immutable"
+                     },
+                     panel?.
+                Children?.
+                OfType<StackPanel>().
+                Select((elem, i) => elem.Children.OfType<TextBlock>().First().Text)
+                     );
+        }
 
 		
 

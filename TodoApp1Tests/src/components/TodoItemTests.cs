@@ -20,7 +20,9 @@ namespace ToDoApp1.Tests
 		{
 			var todoitem = new TodoItem(new TodoListItem(0, "React", TodoListItem.Statuses.Active));
 
-			var tb = todoitem.Render().RenderAsFrameworkElement() as TextBlock;
+            var stackPanel = todoitem.Render().RenderAsFrameworkElement() as StackPanel;
+
+            var tb = stackPanel.Children.OfType<TextBlock>().FirstOrDefault();
 
 			Assert.AreEqual("React", tb?.Text);
 		}
@@ -29,7 +31,8 @@ namespace ToDoApp1.Tests
 		public void RendersItemBeingEdited()
 		{
 			var todoitem = new TodoItem(new TodoListItem(117, "Quandry", TodoListItem.Statuses.Active, true));
-			var textBox = todoitem.Render().RenderAsFrameworkElement() as TextBox;
+            var stackPanel = todoitem.Render().RenderAsFrameworkElement() as StackPanel;
+            var textBox = stackPanel.Children.OfType<TextBox>().FirstOrDefault();
 			Assert.AreEqual("Quandry", textBox?.Text);
 		}
 
@@ -37,8 +40,20 @@ namespace ToDoApp1.Tests
         public void StrikesOutTheItemIfItIsCompleted()
         {
             var todoitem = new TodoItem(new TodoListItem(117, "Quandry", TodoListItem.Statuses.Completed, false));
-            var textBlock = todoitem.Render().RenderAsFrameworkElement() as TextBlock;
+
+            var stackPanel = todoitem.Render().RenderAsFrameworkElement() as StackPanel;
+            var textBlock = stackPanel.Children.OfType<TextBlock>().FirstOrDefault();
             Assert.AreEqual(true, textBlock.TextDecorations.Any(t => t.Location == TextDecorationLocation.Strikethrough));
+        }
+
+	    [Test, Description("should be checked if the item is completed")]
+	    public void ShouldBeCheckedIfTheItemIsCompleted()
+	    {
+            var todoitem = new TodoItem(new TodoListItem(117, "Quandry", TodoListItem.Statuses.Completed, false));
+            var stackPanel = todoitem.Render().RenderAsFrameworkElement() as StackPanel;
+
+	        var checkBox = stackPanel.Children.OfType<CheckBox>().FirstOrDefault();
+            Assert.AreEqual(true, checkBox.IsChecked.GetValueOrDefault());
         }
 
         [Test]
@@ -50,8 +65,11 @@ namespace ToDoApp1.Tests
 			App.ItemsStore = itemsStoreMock.Object;
 
 			var todoitem = new TodoItem(new TodoListItem(117, "Quandry", TodoListItem.Statuses.Active, true));
-			var textBox = todoitem.Render().RenderAsFrameworkElement() as TextBox;
-			textBox.Text = "Zhuzhuzhu";
+            var stackPanel = todoitem.Render().RenderAsFrameworkElement() as StackPanel;
+
+            var textBox = stackPanel.Children.OfType<TextBox>().FirstOrDefault();
+
+            textBox.Text = "Zhuzhuzhu";
 			textBox?.RaiseEvent(new KeyEventArgs(Keyboard.PrimaryDevice, new Mock<PresentationSource>().Object, 0, Key.Enter) { RoutedEvent = TextBox.KeyDownEvent });
 
 			itemsStoreMock.Verify(store => store.Dispatch(It.IsAny<IAction>()));
