@@ -25,11 +25,6 @@ namespace ToDoApp1
                     HorizontalAlignment(HorizontalAlignment.Left).
                     Orientation(Orientation.Horizontal).
                     Children(
-                            new NXaml<CheckBox>(todoListItem).
-                                    IsChecked(todoListItem.IsCompleted).
-                                    HorizontalAlignment(HorizontalAlignment.Left).
-                                    Margin(0,0,10,0),
-                  
                             new NXaml<TextBox>(todoListItem).
                                     Text(todoListItem.Title).
                                     HorizontalAlignment(HorizontalAlignment.Left).
@@ -45,7 +40,7 @@ namespace ToDoApp1
                     Orientation(Orientation.Horizontal).
                     Children(
                             new NXaml<CheckBox>(todoListItem).
-                                    IsChecked(todoListItem.IsCompleted).
+                                    IsChecked(this.IsCompleted(todoListItem)).
                                     HorizontalAlignment(HorizontalAlignment.Left).
                                     Margin(0, 0, 10, 0),
 
@@ -63,7 +58,6 @@ namespace ToDoApp1
                    Orientation(Orientation.Horizontal).
                    Children(
                            new NXaml<CheckBox>(todoListItem).
-                                   IsChecked(todoListItem.IsCompleted).
                                    HorizontalAlignment(HorizontalAlignment.Left).
                                    Margin(0, 0, 10, 0),
 
@@ -74,7 +68,12 @@ namespace ToDoApp1
                             );
         }
 
-		private void OnKeyDown(object sender, EventArgs e)
+        private bool IsCompleted(TodoListItem todoListItem)
+        {
+            return todoListItem.Status == TodoListItem.Statuses.Completed;
+        }
+
+        private void OnKeyDown(object sender, EventArgs e)
 		{
 			var args = e as KeyEventArgs;
 

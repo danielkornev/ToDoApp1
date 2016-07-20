@@ -18,7 +18,6 @@ namespace ToDoApp1
 		public string Title { get; }
 		public Statuses Status { get; }
 		public bool Editing { get; }
-	    public bool IsCompleted => this.Status == Statuses.Completed;
 
 	    public TodoListItem(int id, string title, Statuses status, bool editing = false)
 		{
