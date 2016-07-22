@@ -1,0 +1,10 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style x:Key="TodoListItemTextBlockStyle" TargetType="TextBlock">
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding DataContext}" Value="True">
+                <Setter Property="TextDecorations" Value="Strikethrough"></Setter>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

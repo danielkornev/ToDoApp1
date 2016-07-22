@@ -25,11 +25,11 @@ namespace ToDoApp1
 			}
 		}
 
-		public ImmutableList<TodoListItem> Items
+		public ImmutableList<TodoListDataItem> Items
 		{
 			get
 			{
-				return GetState(NFactory.Properties.Items, new List<TodoListItem>().ToImmutableList());
+				return GetState(NFactory.Properties.Items, new List<TodoListDataItem>().ToImmutableList());
 			}
 			set
 			{
@@ -61,7 +61,7 @@ namespace ToDoApp1
 													Content("Add #" + (Items.Count + 1)).
 													Click(OnAdd)),
 
-							 new TodoList(TodoListItem.Statuses.Active, Items)
+							 new TodoList(TodoListDataItem.Statuses.Active, Items)
 
 							 );
 		}
@@ -80,7 +80,7 @@ namespace ToDoApp1
 		{
 			// so we need to find the max index
 			int idx = Items.Count;
-			Items = Items.Add(new TodoListItem(idx, Text, TodoListItem.Statuses.Active));
+			Items = Items.Add(new TodoListDataItem(idx, Text, TodoListDataItem.Statuses.Active));
 			Text = "";
 		}
 

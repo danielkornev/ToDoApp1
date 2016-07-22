@@ -9,45 +9,16 @@ namespace ToDoApp1
 {
 	using static NFactory;
 
-	public class TodoListItem
-	{
-		public enum Statuses
-		{
-			Active, Completed
-		}
-
-		public int Id { get; }
-		public string Title { get; }
-		public Statuses Status { get; }
-		public bool Editing { get; }
-
-        public Action ToggleCompleteAction { get; }
-
-        public Action DeleteAction { get; }
-        public EventHandler EditAction { get; }
-
-        public TodoListItem(int id, string title, Statuses status, bool editing = false, Action deleteAction = null, Action toggleCompleteAction = null, EventHandler editAction = null)
-		{
-			Id = id;
-			Title = title;
-			Status = status;
-			Editing = editing;
-		    DeleteAction = deleteAction;
-		    ToggleCompleteAction = toggleCompleteAction;
-		    EditAction = editAction;
-		}
-
-
-	}
+	
 
 	public class TodoList : NClass
 	{
 
-		public IList<TodoListItem> Items
+		public IList<TodoListDataItem> Items
 		{
 			get
 			{
-				return Get<IList<TodoListItem>>(NFactory.Properties.Items, new List<TodoListItem>());
+				return Get<IList<TodoListDataItem>>(NFactory.Properties.Items, new List<TodoListDataItem>());
 			}
 			set
 			{
@@ -58,13 +29,13 @@ namespace ToDoApp1
 		/// <summary>
 		/// Filters the items according to their status
 		/// </summary>
-		public IList<TodoListItem> GetItems()
+		public IList<TodoListDataItem> GetItems()
 		{
 			if (this.Filter == null) return this.Items;
 			else return this.Items.Where(i => i.Status == this.Filter).ToList();
 		}
 
-		public TodoListItem.Statuses? Filter { get; private set; }
+		public TodoListDataItem.Statuses? Filter { get; private set; }
 
 		public override NElement Render()
 		{
@@ -72,7 +43,7 @@ namespace ToDoApp1
 						  Children(GetItems().Select((item, idx) => new TodoItem(item)));
 		} 
 
-		public TodoList(TodoListItem.Statuses? filter, IList<TodoListItem> items)
+		public TodoList(TodoListDataItem.Statuses? filter, IList<TodoListDataItem> items)
 		{
 			Items = items;
 			Filter = filter;

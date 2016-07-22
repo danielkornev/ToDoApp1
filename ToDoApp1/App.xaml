@@ -5,4 +5,11 @@
 	<Application.MainWindow>
 		<Window Title="NReact Todo App" />
 	</Application.MainWindow>
+    <Application.Resources>
+        <ResourceDictionary>
+             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="src/resources/ToDoAppResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
 </Application>

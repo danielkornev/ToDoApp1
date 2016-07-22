@@ -6,7 +6,7 @@ namespace ToDoApp1
 {
 	public static class TodoItemsReducer
 	{
-		public static ImmutableList<TodoListItem> Execute(ImmutableList<TodoListItem> previousstate, IAction action)
+		public static ImmutableList<TodoListDataItem> Execute(ImmutableList<TodoListDataItem> previousstate, IAction action)
 		{
 			return previousstate;
 		}

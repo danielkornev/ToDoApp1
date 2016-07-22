@@ -11,21 +11,21 @@ namespace ToDoApp1
 	/// </summary>
 	public partial class App : Application
 	{
-		public static IStore<ImmutableList<TodoListItem>> ItemsStore { get; protected internal set; }
+		public static IStore<ImmutableList<TodoListDataItem>> ItemsStore { get; protected internal set; }
 
 		void Application_Startup(object sender, StartupEventArgs e)
 		{
 			MainWindow.Render(new TodoApp());
 			MainWindow.Show();
 
-			var initialItems = new List<TodoListItem>
+			var initialItems = new List<TodoListDataItem>
 			{
-				new TodoListItem(1, "React", TodoListItem.Statuses.Active),
-				new TodoListItem(2, "Redux", TodoListItem.Statuses.Active, true),
-				new TodoListItem(3, "Immutable", TodoListItem.Statuses.Completed)
+				new TodoListDataItem(1, "React", TodoListDataItem.Statuses.Active),
+				new TodoListDataItem(2, "Redux", TodoListDataItem.Statuses.Active, true),
+				new TodoListDataItem(3, "Immutable", TodoListDataItem.Statuses.Completed)
 			}.ToImmutableList();
 
-			ItemsStore = new Store<ImmutableList<TodoListItem>>(TodoItemsReducer.Execute, initialItems);
+			ItemsStore = new Store<ImmutableList<TodoListDataItem>>(TodoItemsReducer.Execute, initialItems);
 		}
 	} // class
 } // namespace

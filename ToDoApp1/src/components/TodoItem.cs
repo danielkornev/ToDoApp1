@@ -7,104 +7,145 @@ using System.Windows.Input;
 
 namespace ToDoApp1
 {
-	public class TodoItem : NClass
-	{
-		private TodoListItem todoListItem;
+    public class TodoItem : NClass
+    {
+        private TodoListDataItem _todoListDataItem;
 
-		public TodoItem(TodoListItem todoListItem)
-		{
-			this.todoListItem = todoListItem;
-		}
+        public TodoItem(TodoListDataItem _todoListDataItem)
+        {
+            this._todoListDataItem = _todoListDataItem;
+        }
 
-		public override NElement Render()
-		{
-			if (todoListItem.Editing)
-			{
-                return
-              new NXaml<StackPanel>().
-                    HorizontalAlignment(HorizontalAlignment.Left).
-                    Orientation(Orientation.Horizontal).
+        public override NElement Render()
+        {
+            return
+                new NXaml<StackPanel>().
+                    Key("view").
+                    HorizontalAlignment(HorizontalAlignment.Stretch).
+                    Orientation(Orientation.Vertical).
                     Children(
-                            new NXaml<TextBox>(todoListItem).
-                                    Text(todoListItem.Title).
-                                    HorizontalAlignment(HorizontalAlignment.Left).
-                                    KeyDown(OnKeyDown)
-                             );
-			}
 
-		    if (todoListItem.Status == TodoListItem.Statuses.Completed)
-		    {
-                return
-              new NXaml<StackPanel>().
-                    HorizontalAlignment(HorizontalAlignment.Left).
-                    Orientation(Orientation.Horizontal).
-                    Children(
-                            new NXaml<CheckBox>(todoListItem).
-                                    IsChecked(this.IsCompleted(todoListItem)).
-                                    HorizontalAlignment(HorizontalAlignment.Left).
-                                    Margin(0, 0, 10, 0).
-                                    Click(todoListItem.ToggleCompleteAction),
+                        new NXaml<StackPanel>().
+                        HorizontalAlignment(HorizontalAlignment.Stretch).
+                        Orientation(Orientation.Horizontal).
+                        Children(
+                            
+                             new NXaml<CheckBox>(_todoListDataItem).
+                                Key("toggle").
+                                IsChecked(this.IsCompleted(_todoListDataItem)).
+                                HorizontalAlignment(HorizontalAlignment.Left).
+                                Margin(0, 0, 10, 0).
+                                Click(_todoListDataItem.ToggleCompleteAction),
 
                             new NXaml<ContentControl>().Content(
 
-                                    new NXaml<TextBlock>(todoListItem).
-                                            Text(todoListItem.Title).
-                                            TextDecorations(TextDecorations.Strikethrough).
-                                            HorizontalAlignment(HorizontalAlignment.Left).
-                                            Margin(0,0,10,0)
-                                            
-                                            ).MouseDoubleClick(todoListItem.EditAction),
+                                new NXaml<TextBlock>(_todoListDataItem).
+                                    Set(new NProperties().DataContext, IsCompleted(_todoListDataItem)).
+                                    Text(_todoListDataItem.Title).
+                                    Style("TodoListItemTextBlockStyle").
+                                    HorizontalAlignment(HorizontalAlignment.Left).
+                                    Margin(0, 0, 10, 0)
 
-                            new NXaml<Button>(todoListItem).
-                                    Key("deleteTodoListItem").
-                                    Content("X").
-                                    Click(todoListItem.DeleteAction)
-                             );
-            }
+                            ).MouseDoubleClick(_todoListDataItem.EditAction),
 
-            return
-             new NXaml<StackPanel>().
-                   HorizontalAlignment(HorizontalAlignment.Left).
-                   Orientation(Orientation.Horizontal).
-                   Children(
-                           new NXaml<CheckBox>(todoListItem).
-                                   HorizontalAlignment(HorizontalAlignment.Left).
-                                   Margin(0, 0, 10, 0).
-                                   Click(todoListItem.ToggleCompleteAction),
+                            new NXaml<Button>(_todoListDataItem).
+                                Key("destroy").
+                                Content("X").
+                                Click(_todoListDataItem.DeleteAction)
+                        ),
 
-                           new NXaml<ContentControl>().Content(
+                        new NXaml<StackPanel>().
+                        Key("editing").
+                        HorizontalAlignment(HorizontalAlignment.Left).
+                        Orientation(Orientation.Horizontal).
+                        Children(
+                            new NXaml<TextBox>(_todoListDataItem).
+                                Text(_todoListDataItem.Title).
+                                HorizontalAlignment(HorizontalAlignment.Left).
+                                Margin(30, 0, 0, 0).
+                                KeyDown(_todoListDataItem.OnKeyDownAction)
+                        )
+                    );
 
-                                    new NXaml<TextBlock>(todoListItem).
-                                            Text(todoListItem.Title).
-                                            TextDecorations(TextDecorations.Strikethrough).
-                                            HorizontalAlignment(HorizontalAlignment.Left).
-                                            Margin(0, 0, 10, 0)
 
-                                            ).MouseDoubleClick(todoListItem.EditAction),
 
-                           new NXaml<Button>(todoListItem).
-                                    Key("deleteTodoListItem").
-                                    Content("X").
-                                    Click(todoListItem.DeleteAction)
-                            );
+                
+
+
+
+            //if (_todoListDataItem.Editing)
+            //{
+            //    return
+            //        new NXaml<StackPanel>().
+            //            HorizontalAlignment(HorizontalAlignment.Left).
+            //            Orientation(Orientation.Horizontal).
+            //            Children(
+            //                new NXaml<TextBox>(_todoListDataItem).
+            //                    Text(_todoListDataItem.Title).
+            //                    HorizontalAlignment(HorizontalAlignment.Left).
+            //                    KeyDown(_todoListDataItem.OnKeyDownAction)
+            //            );
+            //}
+
+            //if (_todoListDataItem.Status == TodoListDataItem.Statuses.Completed)
+            //{
+            //    return
+            //        new NXaml<StackPanel>().
+            //            HorizontalAlignment(HorizontalAlignment.Left).
+            //            Orientation(Orientation.Horizontal).
+            //            Children(
+            //                new NXaml<CheckBox>(_todoListDataItem).
+            //                    IsChecked(this.IsCompleted(_todoListDataItem)).
+            //                    HorizontalAlignment(HorizontalAlignment.Left).
+            //                    Margin(0, 0, 10, 0).
+            //                    Click(_todoListDataItem.ToggleCompleteAction),
+
+            //                new NXaml<ContentControl>().Content(
+
+            //                    new NXaml<TextBlock>(_todoListDataItem).
+            //                        Text(_todoListDataItem.Title).
+            //                        TextDecorations(TextDecorations.Strikethrough).
+            //                        HorizontalAlignment(HorizontalAlignment.Left).
+            //                        Margin(0, 0, 10, 0)
+
+            //                ).MouseDoubleClick(_todoListDataItem.EditAction),
+
+            //                new NXaml<Button>(_todoListDataItem).
+            //                    Key("deleteTodoListItem").
+            //                    Content("X").
+            //                    Click(_todoListDataItem.DeleteAction)
+            //            );
+            //}
+
+            //return
+            //    new NXaml<StackPanel>().
+            //        HorizontalAlignment(HorizontalAlignment.Left).
+            //        Orientation(Orientation.Horizontal).
+            //        Children(
+            //            new NXaml<CheckBox>(_todoListDataItem).
+            //                HorizontalAlignment(HorizontalAlignment.Left).
+            //                Margin(0, 0, 10, 0).
+            //                Click(_todoListDataItem.ToggleCompleteAction),
+
+            //            new NXaml<ContentControl>().Content(
+
+            //                new NXaml<TextBlock>(_todoListDataItem).
+            //                    Text(_todoListDataItem.Title).
+            //                    HorizontalAlignment(HorizontalAlignment.Left).
+            //                    Margin(0, 0, 10, 0)
+
+            //            ).MouseDoubleClick(_todoListDataItem.EditAction),
+
+            //            new NXaml<Button>(_todoListDataItem).
+            //                Key("deleteTodoListItem").
+            //                Content("X").
+            //                Click(_todoListDataItem.DeleteAction)
+            //        );
         }
 
-        private bool IsCompleted(TodoListItem todoListItem)
+        private bool IsCompleted(TodoListDataItem todoListDataItem)
         {
-            return todoListItem.Status == TodoListItem.Statuses.Completed;
+            return todoListDataItem.Status == TodoListDataItem.Statuses.Completed;
         }
-
-        private void OnKeyDown(object sender, EventArgs e)
-		{
-			var args = e as KeyEventArgs;
-
-			var tb = sender as TextBox;
-
-			if (args?.Key == System.Windows.Input.Key.Enter)
-			{
-				App.ItemsStore.Dispatch(new TodoItemUpdateAction(todoListItem.Id, tb?.Text));
-			}
-
-		}
-	}
+    }
 }
