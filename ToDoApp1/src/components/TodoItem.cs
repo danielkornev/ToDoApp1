@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Shapes;
 using System.Linq;
+using System.Windows.Media;
 
 namespace ToDoApp1
 {
@@ -57,8 +58,16 @@ namespace ToDoApp1
 
                             new NXaml<Button>(_todoListDataItem).
                                 Key("destroy").
-                                Content("X").
-                                Click(_todoListDataItem.DeleteAction)
+                                Style("destroy").
+                                Click(_todoListDataItem.DeleteAction).
+                                Content(
+
+                                new NXaml<TextBlock>().
+                                Text("x").
+                                FontSize(30).
+                                FontFamily("Arial").
+                                Foreground("#FFcc9a9a")
+                                )
                         ),
 
                         new NXaml<StackPanel>().
