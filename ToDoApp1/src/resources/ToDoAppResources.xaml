@@ -84,10 +84,13 @@
                 x:Name="Border"
                 CornerRadius="0"
                 BorderThickness="0" Background="{x:Null}" BorderBrush="{x:Null}">
-                        <ContentPresenter Margin="2"
+                        <ContentPresenter 
+                            x:Name="ContentPresenter"
+                            Margin="2"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                            RecognizesAccessKey="True" />
+                            RecognizesAccessKey="True"
+                            Visibility="Visible"/>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
