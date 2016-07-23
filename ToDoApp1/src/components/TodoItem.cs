@@ -4,6 +4,7 @@ using System.Windows;
 using NReact;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Shapes;
 
 namespace ToDoApp1
 {
@@ -24,8 +25,11 @@ namespace ToDoApp1
                     HorizontalAlignment(HorizontalAlignment.Stretch).
                     Orientation(Orientation.Vertical).
                     Children(
-
+                    
                         new NXaml<StackPanel>().
+                        Key("editing").
+                        Style("viewingTodoItemStyle").
+                        Set(new NProperties().DataContext, _todoListDataItem).
                         HorizontalAlignment(HorizontalAlignment.Stretch).
                         Orientation(Orientation.Horizontal).
                         Children(
@@ -40,7 +44,7 @@ namespace ToDoApp1
                             new NXaml<ContentControl>().Content(
 
                                 new NXaml<TextBlock>(_todoListDataItem).
-                                    Set(new NProperties().DataContext, IsCompleted(_todoListDataItem)).
+                                    Set(new NProperties().DataContext, _todoListDataItem).
                                     Text(_todoListDataItem.Title).
                                     Style("TodoListItemTextBlockStyle").
                                     HorizontalAlignment(HorizontalAlignment.Left).
@@ -56,15 +60,22 @@ namespace ToDoApp1
 
                         new NXaml<StackPanel>().
                         Key("editing").
+                        Style("editingTodoItemStyle").
+                        Set(new NProperties().DataContext, _todoListDataItem).
                         HorizontalAlignment(HorizontalAlignment.Left).
                         Orientation(Orientation.Horizontal).
                         Children(
                             new NXaml<TextBox>(_todoListDataItem).
                                 Text(_todoListDataItem.Title).
+                                Style("todoHeaderInput").
                                 HorizontalAlignment(HorizontalAlignment.Left).
-                                Margin(30, 0, 0, 0).
+                                Margin(0, 0, 0, 0).
                                 KeyDown(_todoListDataItem.OnKeyDownAction)
-                        )
+                        ),
+
+                        new NXaml<Rectangle>().
+                        Key("line").
+                        Style("line")
                     );
 
 

@@ -29,7 +29,7 @@ namespace ToDoApp1
 		{
 			return
 			  new NXaml<StackPanel>().
-					HorizontalAlignment(HorizontalAlignment.Center).
+                    HorizontalAlignment(HorizontalAlignment.Center).
 					Children(
                             new TodoHeader(AddItem),
                             

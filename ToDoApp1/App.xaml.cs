@@ -17,6 +17,7 @@ namespace ToDoApp1
 		{
 			MainWindow.Render(new TodoApp());
 			MainWindow.Show();
+		    MainWindow.Style = Application.Current.FindResource("mainWindow") as Style;
 
 			var initialItems = new List<TodoListDataItem>
 			{

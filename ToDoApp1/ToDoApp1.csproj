@@ -97,6 +97,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="src\components\TextInput.cs" />
+    <Compile Include="src\components\TextInputWithPlaceholder.cs" />
     <Compile Include="src\components\TodoItem.cs" />
     <Compile Include="src\components\TodoApp.cs" />
     <Compile Include="src\actions\TodoItemUpdateAction.cs" />

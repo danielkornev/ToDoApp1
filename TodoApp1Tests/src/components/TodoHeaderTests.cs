@@ -26,7 +26,7 @@ namespace ToDoApp1.Tests
 
             var component = new TodoHeader(addItem).Render().RenderAsFrameworkElement() as StackPanel;
 
-            var textBox = component.Children.OfType<TextBox>().First();
+            var textBox = component.FindChild<TextBox>((elem)=>true);
 
             textBox.Text = "This is a new item";
 

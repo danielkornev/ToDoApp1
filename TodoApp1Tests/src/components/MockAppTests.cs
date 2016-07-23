@@ -13,6 +13,8 @@ namespace ToDoApp1.Tests
 
         public MockAppTests()
         {
+            if (Application.Current != null) return;
+
             string path = Path.Combine(NUnit.Framework.TestContext.CurrentContext.TestDirectory, "ToDoApp1.exe");
 
             MockApp = new Application()

@@ -74,6 +74,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\components\MockAppTests.cs" />
     <Compile Include="src\components\TextInputTests.cs" />
+    <Compile Include="src\components\TextInputWithPlaceholderTests.cs" />
     <Compile Include="src\components\TodoAppTests.cs" />
     <Compile Include="src\components\TodoHeaderTests.cs" />
     <Compile Include="src\components\TodoItemTests.cs" />

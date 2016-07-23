@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Shapes;
 using NReact;
 
 namespace ToDoApp1
@@ -25,37 +26,20 @@ namespace ToDoApp1
                     Children(
 
                         new NXaml<TextBlock>().
-                            Text("TODOS").
-                            Style("todoHeaderH1").
-                            HorizontalAlignment(HorizontalAlignment.Center).
-                            Margin(0, 0, 0, 50),
-
-                        new NXaml<TextBlock>().
-                            Text("What needs to be done?").
-                            HorizontalAlignment(HorizontalAlignment.Center).
-                            Margin(0, 0, 0, 10),
+                            Text("todos").
+                            Style("todoHeaderH1"),
                         
-                        new NXaml<TextBox>().
-                            Key("addTodoInput").
-                            Text("Add").
-                            HorizontalAlignment(HorizontalAlignment.Stretch).
-                            KeyDown(this._OnKeyDown)
+                        new TextInputWithPlaceholder(_ProcessTextInput),
+
+                        new NXaml<Rectangle>().
+                        Key("line").
+                        Style("line")
                     );
         }
 
-        private void _OnKeyDown(object sender, EventArgs e)
+        private void _ProcessTextInput(string input)
         {
-            var args = e as KeyEventArgs;
-            var addTodoInput = sender as TextBox;
-
-            if (args?.Key == System.Windows.Input.Key.Enter 
-                && 
-                addTodoInput!=null
-                &&
-                addTodoInput.Text.Length>0)
-            {
-                this.addItem(addTodoInput.Text);
-            }
+            this.addItem(input);
         }
     }
 }
