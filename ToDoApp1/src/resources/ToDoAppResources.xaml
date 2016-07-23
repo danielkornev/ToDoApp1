@@ -18,6 +18,10 @@
         </Style.Triggers>
     </Style>
 
+    <Style x:Key="todoItem" TargetType="StackPanel">
+        <Setter Property="Width" Value="550" />
+    </Style>
+
     <Style x:Key="viewingTodoItemStyle" TargetType="StackPanel">
         <Style.Triggers>
             <DataTrigger Binding="{Binding Editing}" Value="True">
@@ -71,12 +75,16 @@
         <Setter Property="Background" Value="#FFFFFFFF"/>
     </Style>
 
+    <Style x:Key="todoItemContentControlStyle" TargetType="ContentControl">
+        <Setter Property="Width" Value="469"/>
+    </Style>
+
     <!-- Button -->
     <Style x:Key="destroy" TargetType="Button">
         <Setter Property="SnapsToDevicePixels" Value="true" />
         <Setter Property="OverridesDefaultStyle" Value="true" />
-        <Setter Property="MinHeight" Value="23" />
-        <Setter Property="MinWidth" Value="75" />
+        <Setter Property="Padding" Value="16" />
+        <Setter Property="Width" Value="22" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -90,7 +98,8 @@
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             RecognizesAccessKey="True"
-                            Visibility="Visible"/>
+                            Visibility="Visible"
+                            />
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

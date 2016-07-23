@@ -24,6 +24,7 @@ namespace ToDoApp1
             return
                 new NXaml<StackPanel>().
                     Key("view").
+                    Style("todoItem").
                     HorizontalAlignment(HorizontalAlignment.Stretch).
                     Orientation(Orientation.Vertical).
                     Children(
@@ -45,7 +46,9 @@ namespace ToDoApp1
                                 Margin(10, 0, -2, 0).
                                 Click(_todoListDataItem.ToggleCompleteAction),
 
-                            new NXaml<ContentControl>().Content(
+                            new NXaml<ContentControl>().
+                                Style("todoItemContentControlStyle").
+                                Content(
 
                                 new NXaml<TextBlock>(_todoListDataItem).
                                     Set(new NProperties().DataContext, _todoListDataItem).
@@ -63,7 +66,7 @@ namespace ToDoApp1
                                 Content(
 
                                 new NXaml<TextBlock>().
-                                Text("x").
+                                Text("×").
                                 FontSize(30).
                                 FontFamily("Arial").
                                 Foreground("#FFcc9a9a")
