@@ -34,12 +34,11 @@ namespace ToDoApp1
                             Text("What needs to be done?").
                             HorizontalAlignment(HorizontalAlignment.Center).
                             Margin(0, 0, 0, 10),
-
+                        
                         new NXaml<TextBox>().
                             Key("addTodoInput").
-                            Text("").
+                            Text("Add").
                             HorizontalAlignment(HorizontalAlignment.Stretch).
-                            Margin(0, 0, 0, 10).
                             KeyDown(this._OnKeyDown)
                     );
         }
