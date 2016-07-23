@@ -7,4 +7,9 @@
             </DataTrigger>
         </Style.Triggers>
     </Style>
+
+    <Style x:Key="todoHeaderH1" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="32" />
+        <Setter Property="FontWeight" Value="Thin" />
+    </Style>
 </ResourceDictionary>

@@ -75,6 +75,7 @@
     <Compile Include="src\components\MockAppTests.cs" />
     <Compile Include="src\components\TextInputTests.cs" />
     <Compile Include="src\components\TodoAppTests.cs" />
+    <Compile Include="src\components\TodoHeaderTests.cs" />
     <Compile Include="src\components\TodoItemTests.cs" />
     <Compile Include="src\components\TodoListTests.cs" />
   </ItemGroup>
