@@ -79,6 +79,7 @@
     <Compile Include="src\components\TodoHeaderTests.cs" />
     <Compile Include="src\components\TodoItemTests.cs" />
     <Compile Include="src\components\TodoListTests.cs" />
+    <Compile Include="src\components\TodoTools.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\nreact\NReact.WPF\NReact.WPF.csproj">

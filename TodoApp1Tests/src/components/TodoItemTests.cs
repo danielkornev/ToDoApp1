@@ -48,7 +48,7 @@ namespace ToDoApp1.Tests
 
             Assert.AreEqual(true, checkBox.IsChecked.GetValueOrDefault());
 
-            //var textBlock = stackPanel.Children.OfType<ContentControl>().First(c=>c.GetType()!=typeof(CheckBox)).Content as TextBlock;
+            var textBlock = stackPanel.Children.OfType<ContentControl>().First(c => c.GetType() != typeof(CheckBox)).Content as TextBlock;
 
             //Assert.AreEqual(true, textBlock.TextDecorations.Any(t => t.Location == TextDecorationLocation.Strikethrough));
         }
@@ -98,10 +98,10 @@ namespace ToDoApp1.Tests
 
 
             var todoitem = new TodoItem(new TodoListDataItem(0, text, TodoListDataItem.Statuses.Active, false, null, toggleComplete));
-            var stackPanel = ((todoitem.Render().RenderAsFrameworkElement()) as StackPanel).Children.OfType<StackPanel>().First();
-
+	        var stackPanel = ((todoitem.Render().RenderAsFrameworkElement()) as StackPanel);
+            
             // raising our event handler
-            stackPanel.Children.OfType<CheckBox>().First().RaiseEvent(new RoutedEventArgs(CheckBox.ClickEvent));
+            stackPanel.FindChild<CheckBox>((elem) => true).RaiseEvent(new RoutedEventArgs(CheckBox.ClickEvent));
 
             Assert.AreEqual(true, isChecked);
         }
