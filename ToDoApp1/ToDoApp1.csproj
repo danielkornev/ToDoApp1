@@ -102,6 +102,7 @@
     <Compile Include="src\components\TodoApp.cs" />
     <Compile Include="src\actions\TodoItemUpdateAction.cs" />
     <Compile Include="src\components\TodoList.cs" />
+    <Compile Include="src\components\TodoTools.cs" />
     <Compile Include="src\data\TodoListDataItem.cs" />
     <Compile Include="src\components\TodoHeader.cs" />
     <Compile Include="TodoItemsReducer.cs" />

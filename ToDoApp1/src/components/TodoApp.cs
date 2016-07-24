@@ -33,7 +33,9 @@ namespace ToDoApp1
 					Children(
                             new TodoHeader(AddItem),
                             
-							new TodoList(TodoListDataItem.Statuses.Active, Items)
+							new TodoList(TodoListDataItem.Statuses.Active, Items),
+
+                            new TodoTools(Items.Count)
 
 							 );
 		}
