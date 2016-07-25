@@ -35,9 +35,11 @@ namespace ToDoApp1
                             
 							new TodoList(TodoListDataItem.Statuses.Active, Items),
 
-                            new TodoTools(Items.Count)
+                            new TodoTools(Items.Count),
 
-							 );
+                            new Footer()
+
+                             );
 		}
 
         private void AddItem(string Text)

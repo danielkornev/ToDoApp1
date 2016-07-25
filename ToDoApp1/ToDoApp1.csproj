@@ -96,6 +96,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="src\components\Footer.cs" />
     <Compile Include="src\components\TextInput.cs" />
     <Compile Include="src\components\TextInputWithPlaceholder.cs" />
     <Compile Include="src\components\TodoItem.cs" />

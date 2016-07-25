@@ -57,6 +57,7 @@
     </Style>
 
     <Style x:Key="todoHeaderH1" TargetType="TextBlock">
+        <Setter Property="Margin" Value="0,18,0,0"/>
         <Setter Property="FontSize" Value="100" />
         <Setter Property="FontWeight" Value="Thin" />
         <Setter Property="TextAlignment" Value="Center"/>
@@ -96,7 +97,7 @@
         <Setter Property="Background" Value="White"/>
         <!--<Setter Property="Margin" Value="0,0,0,40"/>-->
         <Setter Property="Width" Value="550"/>
-        <Setter Property="Height" Value="45"/>
+        <Setter Property="Height" Value="40"/>
     </Style>
 
     <Style x:Key="todoItemContentControlStyle" TargetType="ContentControl">
@@ -105,11 +106,62 @@
 
     <Style x:Key="clearCompleted" TargetType="Button">
         <Setter Property="HorizontalAlignment" Value="Right"/>
-        <Setter Property="Padding" Value="16"/>
+        <Setter Property="Padding" Value="16,0,16,0"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FontSize" Value="12"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Template" Value="{DynamicResource CleanButtonStyle}"/>
+    </Style>
+
+    <Style x:Key="footerHyperlink" TargetType="{x:Type Hyperlink}">
+        <Setter Property="Foreground" Value="#FF777777"/>
+        <Setter Property="TextDecorations" Value="{x:Null}"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="#FF777777"/>
+                <Setter Property="TextDecorations" Value="Underline"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="footer" TargetType="TextBlock">
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="Foreground" Value="#FF777777"/>
+        <Setter Property="Margin" Value="0,0,0,10"/>
+    </Style>
+
+    <Style x:Key="footerLinkToPhacks" TargetType="ContentControl">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <TextBlock Style="{StaticResource footer}">
+                        <TextBlock.Inlines>
+                            <Span>
+                                Created by <Hyperlink NavigateUri="https://twitter.com/danielko" Style="{StaticResource footerHyperlink}">
+                                    @danielko</Hyperlink>
+                            </Span>
+                            </TextBlock.Inlines>
+                    </TextBlock>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="footerLinkToTodoMvc" TargetType="ContentControl">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <TextBlock Style="{StaticResource footer}">
+                        <TextBlock.Inlines>
+                            <Span>
+                                Inspired by <Hyperlink NavigateUri="http://todomvc.com" Style="{StaticResource footerHyperlink}">TodoMVC</Hyperlink>
+                            </Span>
+                        </TextBlock.Inlines>
+                    </TextBlock>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <!-- Button -->
