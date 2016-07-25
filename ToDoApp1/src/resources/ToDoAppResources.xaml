@@ -24,6 +24,8 @@
 
     <Style x:Key="itemsLeft" TargetType="TextBlock">
         <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Padding" Value="16"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
 
     <Style x:Key="viewingTodoItemStyle" TargetType="StackPanel">
@@ -75,12 +77,38 @@
         <Setter Property="MinWidth" Value="230"/>
         <Setter Property="MaxWidth" Value="550"/>
         <Setter Property="Width" Value="550"/>
-        <Setter Property="Margin" Value="0,0,0,40"/>
         <Setter Property="Background" Value="#FFFFFFFF"/>
+    </Style>
+
+    <Style x:Key="radioAsToggleButtonStyle" BasedOn="{StaticResource {x:Type ToggleButton}}" TargetType="RadioButton">
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Height" Value="25"/>
+        <Setter Property="Template" Value="{DynamicResource TodoMvcFilterButtonStyle}"/>
+    </Style>
+
+    <Style x:Key="filtersPanel" TargetType="StackPanel">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Key="todoTools" TargetType="Grid">
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Background" Value="White"/>
+        <!--<Setter Property="Margin" Value="0,0,0,40"/>-->
+        <Setter Property="Width" Value="550"/>
+        <Setter Property="Height" Value="45"/>
     </Style>
 
     <Style x:Key="todoItemContentControlStyle" TargetType="ContentControl">
         <Setter Property="Width" Value="469"/>
+    </Style>
+
+    <Style x:Key="clearCompleted" TargetType="TextBlock">
+        <Setter Property="TextDecorations" Value="Underline"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="Padding" Value="16"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
 
     <!-- Button -->
@@ -189,4 +217,23 @@
             </Setter.Value>
         </Setter>
     </Style>
+    <ControlTemplate x:Key="TodoMvcFilterButtonStyle" TargetType="{x:Type ButtonBase}">
+        <Border x:Name="border" BorderBrush="Transparent" BorderThickness="{TemplateBinding BorderThickness}" Background="{x:Null}" SnapsToDevicePixels="True" CornerRadius="2" Margin="5,0" Padding="5,0">
+            <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Button.IsDefaulted" Value="True">
+
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="BorderBrush" TargetName="border" Value="#FFF7EAEA"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="BorderBrush" TargetName="border" Value="#FFEFD5D5"/>
+            </Trigger>
+            <Trigger Property="ToggleButton.IsChecked" Value="True">
+                <Setter Property="BorderBrush" TargetName="border" Value="#FFEFD5D5"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
 </ResourceDictionary>
