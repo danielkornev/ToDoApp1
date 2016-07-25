@@ -39,9 +39,16 @@ namespace ToDoApp1
 
 		public override NElement Render()
 		{
-			return new NXaml<StackPanel>().
-                    Style("body").
-                    Children(GetItems().Select((item, idx) => new TodoItem(item)));
+		    return new NXaml<Border>().
+		        Set(new NProperties().SnapsToDevicePixels, true).
+		        BorderBrush("#FFC7C7C7").
+		        BorderThickness(1, 0, 1, 0).
+		        Child(
+
+		            new NXaml<StackPanel>().
+		                Style("body").
+		                Children(GetItems().Select((item, idx) => new TodoItem(item)))
+		        );
 		} 
 
 		public TodoList(TodoListDataItem.Statuses? filter, IList<TodoListDataItem> items)

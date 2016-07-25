@@ -18,7 +18,7 @@ namespace ToDoApp1.Tests
 
             var component = new TextInputWithPlaceholder(null);
 
-            var grid = (component.Render().RenderAsFrameworkElement() as Grid);
+            var grid = (component.Render().RenderAsFrameworkElement() as Border).Child as Grid;
 
             var textBox = grid.FindChild<TextBox>((elem) => true);
 

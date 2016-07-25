@@ -33,21 +33,30 @@ namespace ToDoApp1
 
         public override NElement Render()
         {
-            return new NXaml<Grid>().
-                Children(
-                    new NXaml<TextBox>().
-                        Key("input").
-                        Style("todoHeaderInput").
-                        Text(TextValue).
-                        TextChanged(this._TextChanged).
-                        KeyDown(this._OnKeyDown),
+            return
+                new NXaml<Border>().
+                    Set(new NProperties().SnapsToDevicePixels, true).
+                    BorderBrush("#FFC7C7C7").
+                    BorderThickness(1, 0, 1, 0).
+                    Child(
 
-                    new NXaml<TextBlock>().
-                        Key("placeholder").
-                        Style("todoHeaderPlaceholder").
-                        IsHitTestVisible(false).
-                        Text("What needs to be done?")
-                );
+
+                        new NXaml<Grid>().
+                            Children(
+                                new NXaml<TextBox>().
+                                    Key("input").
+                                    Style("todoHeaderInput").
+                                    Text(TextValue).
+                                    TextChanged(this._TextChanged).
+                                    KeyDown(this._OnKeyDown),
+
+                                new NXaml<TextBlock>().
+                                    Key("placeholder").
+                                    Style("todoHeaderPlaceholder").
+                                    IsHitTestVisible(false).
+                                    Text("What needs to be done?")
+                            )
+                    );
         }
 
         private void _TextChanged(object sender)

@@ -42,7 +42,7 @@ namespace ToDoApp1.Tests
 
 			var component = todolist.Render();
 
-            var sp = component.RenderAsFrameworkElement() as StackPanel;
+            var sp = (component.RenderAsFrameworkElement() as Border).Child as StackPanel;
 
 
             Assert.AreEqual(2, sp.Children.Count);
@@ -55,7 +55,7 @@ namespace ToDoApp1.Tests
         {
             const TodoListDataItem.Statuses filter = TodoListDataItem.Statuses.Completed;
             var todolist = new TodoList(filter, _todos);
-            var panel = todolist.Render().RenderAsFrameworkElement() as StackPanel;
+            var panel = (todolist.Render().RenderAsFrameworkElement() as Border).Child as StackPanel;
             Assert.AreEqual(1, panel?.Children?.Count);
 
             var txt =
@@ -73,7 +73,7 @@ namespace ToDoApp1.Tests
 		public void RendersAllWhenAllFilterIsPassed()
 		{
 			var todolist = new TodoList(null, _todos);
-			var panel = todolist.Render().RenderAsFrameworkElement() as StackPanel;
+			var panel = (todolist.Render().RenderAsFrameworkElement() as Border).Child as StackPanel;
 			Assert.AreEqual(3, panel?.Children?.Count);
 
 		    Assert.AreEqual(new[]
