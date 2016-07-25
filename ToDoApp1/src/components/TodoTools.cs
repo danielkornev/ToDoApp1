@@ -12,8 +12,9 @@ namespace ToDoApp1
     {
         private string activeItems;
         private int nbActiveItems;
+        private string filter;
 
-        public TodoTools(int nbActiveItems)
+        public TodoTools(int nbActiveItems, string filter = "All")
         {
             this.nbActiveItems = nbActiveItems;
 
@@ -22,7 +23,9 @@ namespace ToDoApp1
             else if (nbActiveItems == 1)
                 activeItems = "1 item left";
             else
-                activeItems = nbActiveItems + " items left";        
+                activeItems = nbActiveItems + " items left";
+
+            this.filter = filter;
         }
 
         public override NElement Render()
@@ -62,6 +65,7 @@ namespace ToDoApp1
 
                                 new NXaml<StackPanel>().
                                     GridColumn(1).
+                                    Set(new NProperties().Name, "filtersPanel").
                                     Style("filtersPanel").
                                     Orientation(Orientation.Horizontal).
                                     Children(
@@ -69,16 +73,19 @@ namespace ToDoApp1
                                         new NXaml<RadioButton>().
                                             Style("radioAsToggleButtonStyle").
                                             Content("All").
+                                            IsChecked(filter == "All").
                                             Set(new NProperties().GroupName, "Filters"),
 
                                         new NXaml<RadioButton>().
                                             Style("radioAsToggleButtonStyle").
                                             Content("Active").
+                                            IsChecked(filter == "Active").
                                             Set(new NProperties().GroupName, "Filters"),
 
                                         new NXaml<RadioButton>().
                                             Style("radioAsToggleButtonStyle").
                                             Content("Completed").
+                                            IsChecked(filter == "Completed").
                                             Set(new NProperties().GroupName, "Filters")
                                     ),
 

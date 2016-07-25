@@ -84,6 +84,7 @@
         <Setter Property="FontSize" Value="12"/>
         <Setter Property="Height" Value="25"/>
         <Setter Property="Template" Value="{DynamicResource TodoMvcFilterButtonStyle}"/>
+        <Setter Property="Foreground" Value="#FF4d4d4d"/>
     </Style>
 
     <Style x:Key="filtersPanel" TargetType="StackPanel">
@@ -217,6 +218,7 @@
             </Setter.Value>
         </Setter>
     </Style>
+
     <ControlTemplate x:Key="TodoMvcFilterButtonStyle" TargetType="{x:Type ButtonBase}">
         <Border x:Name="border" BorderBrush="Transparent" BorderThickness="{TemplateBinding BorderThickness}" Background="{x:Null}" SnapsToDevicePixels="True" CornerRadius="2" Margin="5,0" Padding="5,0">
             <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
