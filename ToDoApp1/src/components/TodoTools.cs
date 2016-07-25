@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
@@ -13,8 +14,9 @@ namespace ToDoApp1
         private string activeItems;
         private int nbActiveItems;
         private string filter;
+        private Action clearCompletedAction;
 
-        public TodoTools(int nbActiveItems, string filter = "All")
+        public TodoTools(int nbActiveItems, string filter = "All", Action clearCompletedAction = null)
         {
             this.nbActiveItems = nbActiveItems;
 
@@ -26,6 +28,7 @@ namespace ToDoApp1
                 activeItems = nbActiveItems + " items left";
 
             this.filter = filter;
+            this.clearCompletedAction = clearCompletedAction;
         }
 
         public override NElement Render()
@@ -89,10 +92,12 @@ namespace ToDoApp1
                                             Set(new NProperties().GroupName, "Filters")
                                     ),
 
-                                new NXaml<TextBlock>().
+                                new NXaml<Button>().
                                     GridColumn(2).
-                                    Text("Clear completed").
-                                    Style("clearCompleted")
+                                    Content("Clear completed").
+                                    Style("clearCompleted").
+                                    Set(new NProperties().Name, "clearCompletedButton").
+                                    Click(clearCompletedAction)
             #endregion
                                     )
 

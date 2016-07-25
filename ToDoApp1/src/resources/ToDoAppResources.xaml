@@ -103,13 +103,13 @@
         <Setter Property="Width" Value="469"/>
     </Style>
 
-    <Style x:Key="clearCompleted" TargetType="TextBlock">
-        <Setter Property="TextDecorations" Value="Underline"/>
+    <Style x:Key="clearCompleted" TargetType="Button">
         <Setter Property="HorizontalAlignment" Value="Right"/>
         <Setter Property="Padding" Value="16"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FontSize" Value="12"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Template" Value="{DynamicResource CleanButtonStyle}"/>
     </Style>
 
     <!-- Button -->
@@ -235,6 +235,30 @@
             </Trigger>
             <Trigger Property="ToggleButton.IsChecked" Value="True">
                 <Setter Property="BorderBrush" TargetName="border" Value="#FFEFD5D5"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="CleanButtonStyle" TargetType="{x:Type ButtonBase}">
+        <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}"  ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+            <ContentPresenter.Content>
+                <TextBlock x:Name="textBlock" Foreground="#FF4d4d4d" Text="{TemplateBinding Content}">
+                    
+                </TextBlock>
+            </ContentPresenter.Content>
+        </ContentPresenter>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Button.IsDefaulted" Value="True">
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="textBlock" Property="TextDecorations" Value="Underline"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter TargetName="textBlock" Property="TextDecorations" Value="Underline"/>
+            </Trigger>
+            <Trigger Property="ToggleButton.IsChecked" Value="True">
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>

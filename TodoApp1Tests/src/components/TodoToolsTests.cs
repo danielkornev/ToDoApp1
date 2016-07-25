@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using NReact;
@@ -21,7 +22,7 @@ namespace ToDoApp1.Tests
             Assert.AreEqual(true, tb.Text.Contains(nbActiveItems.ToString()));
         }
 
-        [Test, Description("Highlights the active filter")]
+        [Test, Description("highlights the active filter")]
         public void HighlightsActiveFilter()
         {
             var filter = "Active";
@@ -35,6 +36,25 @@ namespace ToDoApp1.Tests
             Assert.AreEqual(false, filters[0].IsChecked);
             Assert.AreEqual(true, filters[1].IsChecked);
             Assert.AreEqual(false, filters[2].IsChecked);
+        }
+
+        [Test, Description("calls a callback when the user clicks on Clear Completed button")]
+        public void CallsCallbackWhenUserClicksOnClearCompletedButton()
+        {
+            var cleared = false;
+            Action clearCompleted = () =>
+            {
+                cleared = true;
+            };
+
+            var component = new TodoTools(0, "All", clearCompleted).Render().RenderAsFrameworkElement() as StackPanel;
+
+            var clearComBtn = component.FindChild<Button>(b => b.Name == "clearCompletedButton");
+
+            // clicking on a button
+            clearComBtn.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+
+            Assert.AreEqual(true, cleared);
         }
     }
 }
